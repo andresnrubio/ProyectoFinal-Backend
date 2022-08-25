@@ -1,0 +1,48 @@
+[
+  {
+    "timestamp": 1661318279464,
+    "id": 3,
+    "products": [
+      {
+        "title": "pera",
+        "price": 500,
+        "description": "y que pera!",
+        "img": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+        "stock": 8,
+        "codigo": "per1661312395593",
+        "timestamp": 1661312395593,
+        "id": 2
+      }
+    ]
+  },
+  {
+    "timestamp": 1661397409521,
+    "id": 4
+  },
+  {
+    "timestamp": 1661315676806,
+    "id": 1,
+    "products": [
+      {
+        "title": "pera",
+        "price": 500,
+        "description": "y que pera!",
+        "img": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+        "stock": 8,
+        "codigo": "per1661312395593",
+        "timestamp": 1661312395593,
+        "id": 2
+      },
+      {
+        "title": "pera",
+        "price": 500,
+        "description": "y que pera!",
+        "img": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+        "stock": 8,
+        "codigo": "per1661312395593",
+        "timestamp": 1661312395593,
+        "id": 2
+      }
+    ]
+  }
+]

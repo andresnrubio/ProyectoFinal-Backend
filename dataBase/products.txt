@@ -1,0 +1,22 @@
+[
+  {
+    "title": "pera",
+    "price": 500,
+    "description": "y que pera!",
+    "img": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+    "stock": 8,
+    "codigo": "per1661312395593",
+    "timestamp": 1661312395593,
+    "id": 2
+  },
+  {
+    "title": "sandia",
+    "price": 1000,
+    "description": "Es LA sandia",
+    "img": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_melancia-256.png",
+    "stock": 1,
+    "codigo": "san1661311662897",
+    "timestamp": 1661399652628,
+    "id": 1
+  }
+]
