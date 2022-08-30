@@ -34,7 +34,7 @@ router.get("/:id/productos", async (req, res) => {
   try {
     const cart = await cartContainer.getById(Number(req.params.id));
     res.json({
-      data: cart.products,
+      data: cart.productos,
     })
   }
   catch {
@@ -53,10 +53,10 @@ router.post("/:id/productos", async (req, res) => {
         error: `No existe producto con ese ID`,
       })
     }else{
-       if (cart.products) {
-        cart.products.push(product)
+       if (cart.productos) {
+        cart.productos.push(product)
       } else {
-        cart.products = [product]
+        cart.productos = [product]
       }
       await cartContainer.deleteById(Number(req.params.id));
       await cartContainer.saveInFile(cart);
@@ -71,16 +71,14 @@ router.post("/:id/productos", async (req, res) => {
 });
 
 router.delete("/:id/productos/:id_prod", async (req, res) => {
-  //ELIMINAR UN PRODUCTO DEL CARRITO POR SU ID DE CARRITO Y ID DE PRODUCTO
   const cart = await cartContainer.getById(Number(req.params.id));
-  const product = await productsContainer.getById(Number(req.params.id));
+  const product = await productsContainer.getById(Number(req.params.id_prod));
   if(product){
-
   let newListProducts = [];
-  newListProducts = cart.products.filter(
-    (product) => product.id != Number(req.params.id_prod)
+  newListProducts = cart.productos.filter(
+    (producto) => producto.id != Number(req.params.id_prod)
   );
-  cart.products = newListProducts;
+  cart.productos = newListProducts;
   await cartContainer.deleteById(Number(req.params.id));
   await cartContainer.saveInFile(cart);
  

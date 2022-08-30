@@ -1,6 +1,6 @@
 const FileContainer = require("../container/fileContainer.js");
 
-const path = "./dataBase/products.txt";
+const path = "./dataBase/productos.txt";
 
 const productsContainer = new FileContainer(path);
 

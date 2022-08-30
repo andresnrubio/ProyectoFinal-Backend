@@ -1,4 +1,3 @@
-const { time } = require("console");
 const fs = require("fs");
 
 class FileContainer {
@@ -6,11 +5,25 @@ class FileContainer {
     this.path = path;
   }
 
+
+idAvailable(array){
+    const sortedArray = array
+      .slice() 
+      .sort(function (a, b) {return a.id - b.id});
+    let previousId = 0;
+    for (let element of sortedArray) {
+      if (element.id != (previousId + 1)) {
+        return previousId + 1;
+      }
+      previousId = element.id;
+    }
+    return previousId + 1;
+  }
+
   async readFile() {
     if (fs.existsSync(this.path)) {
       try {
         const data = await fs.promises.readFile(this.path, "utf-8");
-
         return JSON.parse(data);
       } catch (error) {
         throw new Error("Error al leer archivo");
@@ -39,11 +52,14 @@ class FileContainer {
     if(element.id){
       const data = await this.readFile();
       const newData = [...data, element];
+      newData.sort((a, b) => a.id - b.id)
       await fs.promises.writeFile(this.path, JSON.stringify(newData, null, 2));
     }else{
-    try {
-      const data = await this.readFile();
-      const id = data.length == 0 ? 1 : Number(data[data.length - 1].id) + 1;
+      try {
+        const data = await this.readFile();
+      const available = this.idAvailable(data);
+      const id = available
+
       const objectToAdd = { ...element, id: id};
       const newData = [...data, objectToAdd];
       await fs.promises.writeFile(this.path, JSON.stringify(newData, null, 2));
@@ -78,10 +94,10 @@ class FileContainer {
   async deleteById(id) {
     try {
       let dataArch = await this.readFile();
-      let element = dataArch.find((elem) => elem.id === id);
-      if (element) {
-        const dataArchFiltrado = dataArch.filter((elem) => elem.id !== id);
-        // await this.saveInFile(dataArchFiltrado);
+      let element = dataArch.find((elem) => elem.id === Number(id));
+         if (element) {
+        const dataArchFiltrado = dataArch.filter((elem) => elem.id !== Number(id));
+        await this.saveInFile(dataArchFiltrado);
         await fs.promises.writeFile(
           this.path,
           JSON.stringify(dataArchFiltrado, null, 2),

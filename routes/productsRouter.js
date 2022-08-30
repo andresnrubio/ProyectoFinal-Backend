@@ -5,17 +5,17 @@ const router = express.Router();
 let userAdmin = false;
 
 function validateProduct(req, res, next) {
-  const { title, description, price, img, stock } = req.body;
+  const { nombre, descripcion, precio, foto, stock } = req.body;
 
-  if (!title || !description || !price || !img || !stock) {
+  if (!nombre || !descripcion || !precio || !foto || !stock) {
     res.json({ Error: "Faltan datos del producto" });
-  } else if (isNaN(price)) {
+  } else if (isNaN(precio)) {
     res.json({ Error: "El precio del producto debe ser de tipo number" });
   }else{
-  req.title = title;
-  req.description = description;
-  req.price = price;
-  req.img = img;
+  req.nombre = nombre;
+  req.descripcion = descripcion;
+  req.precio = precio;
+  req.foto = foto;
   req.stock = stock;
   next();
 }
@@ -62,7 +62,7 @@ router.get("/:id?", async (req, res) => {
 
 router.post("/", validateAdmin, validateProduct, async (req, res) => {
   const timestamp = Date.now()
-  let codigo = req.body.title.slice(0, 3) + timestamp;
+  let codigo = req.body.nombre.slice(0, 3) + timestamp;
   let product = {...req.body, codigo: codigo, timestamp:timestamp}
   let newProduct = await productsContainer.saveInFile(product);
   res.json({

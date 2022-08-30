@@ -18,9 +18,9 @@ app.use((err, req, res, next) => {
   res.send(err);
 });
 
-// app.all("*", (req, res) => {
-//   res.status(404).json({ res: "Ruta no implementada" });
-// });
+app.all("*", (req, res) => {
+  res.status(404).json({ res: "Ruta no implementada" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
