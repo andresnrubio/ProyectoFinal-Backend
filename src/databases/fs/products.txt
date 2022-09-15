@@ -1,12 +1,12 @@
 [
-   {
+  {
     "nombre": "Calculadora",
     "precio": 500,
     "descripcion": "Para calcular, re sirve",
     "foto": "https://cdn2.iconfinder.com/data/icons/flat-icons-19/512/Calculator.png",
-    "stock": 1,
+    "stock": 3,
     "codigo": "Cal1661872118554",
-    "timestamp": 1661872151727,
+    "timestamp": 1663279860531,
     "id": 1
   }
 ]

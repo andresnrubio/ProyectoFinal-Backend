@@ -1,10 +1,8 @@
 import { response } from 'express'
 const { productsDao: productsContainer } = await import('../daos/index.js')
 
-console.log(await productsContainer.getAllFile())
 
 const getProducts = async (req, res = response) => {
-  console.log("aca llego")
     if (!req.params.id) {
       let products = await productsContainer.getAllFile();
       res.json({

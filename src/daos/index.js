@@ -1,8 +1,10 @@
-//TODO Aca va el Switch con los cases de los diferentes Daos// 
 let productsDao
 let cartDao
 
-switch (process.env.DB_SERVICE){
+//! FALTA PARA LA ENTREGA HACER ESTO!!!
+//TODO Realizar switch con process.env.DB_SERVICE
+
+switch ('fs'){
     case 'mongodb':
 
         break;
@@ -12,9 +14,7 @@ switch (process.env.DB_SERVICE){
         const { default: CartDaoFs } =  await import('../daos/carts/CartsDaoFs.js')
         productsDao = new ProductsDaoFs();
         cartDao = new CartDaoFs();
-    
         break;
-
     case 'firebase':
 
         break;

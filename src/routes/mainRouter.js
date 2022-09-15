@@ -4,6 +4,6 @@ import productsRouter from "./productsRouter.js"
 import cartRouter from "./cartRouter.js"
 
 router.use("/productos", productsRouter);
-// router.use("/carrito", cartRouter);
+router.use("/carrito", cartRouter);
 
 export default router;

@@ -1,6 +1,6 @@
 import express from "express"
 const router = express.Router();
-const {getProducts, addProduct, updateProduct, deleteProduct, validateProduct } = import('../controllers/Products.controller.js')
+const {getProducts, addProduct, updateProduct, deleteProduct, validateProduct } = await import('../controllers/Products.controller.js')
 
 let userAdmin = false;
 
@@ -22,12 +22,12 @@ router.get("/logout", (req, res) => {
   res.status(200).json({ User: "No es Admin" });
 });
 
-router.get("/:id?",()=>{ getProducts });
+router.get("/:id?", getProducts );
 
-router.post("/", validateAdmin, ()=>{ validateProduct}, ()=>{ addProduct});
+router.post("/", validateAdmin,  validateProduct,  addProduct);
 
-router.put("/:id", validateAdmin, ()=>{ updateProduct});
+router.put("/:id", validateAdmin, updateProduct);
 
-router.delete("/:id", validateAdmin, ()=>{ deleteProduct});
+router.delete("/:id", validateAdmin, deleteProduct);
 
 export default router;
