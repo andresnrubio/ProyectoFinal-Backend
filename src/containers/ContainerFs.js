@@ -1,10 +1,9 @@
-const fs = require("fs");
+const fs = import("fs");
 
-class FileContainer {
+class ContainerFs {
   constructor(path) {
     this.path = path;
   }
-
 
 idAvailable(array){
     const sortedArray = array
@@ -21,22 +20,24 @@ idAvailable(array){
   }
 
   async readFile() {
-    if (fs.existsSync(this.path)) {
-      try {
-        const data = await fs.promises.readFile(this.path, "utf-8");
-        return JSON.parse(data);
-      } catch (error) {
-        throw new Error("Error al leer archivo");
-      }
-    } else {
-      try {
-        await fs.promises.writeFile(this.path, JSON.stringify([], null, 2));
-        const data = await fs.promises.readFile(this.path, "utf-8");
-        return JSON.parse(data);
-      } catch (error) {
-        throw new Error("Error al escribir el archivo");
-      }
-    }
+      return {}
+    // if (fs.existsSync(this.path)) {
+    //   try {
+    //     const data = await fs.promises.readFile(this.path, "utf-8");
+    //     return JSON.parse(data);
+    //   } catch (error) {
+    //     throw new Error("Error al leer archivo");
+    //   }
+    // } else {
+
+    //   try {
+    //     await fs.promises.writeFile(this.path, JSON.stringify([], null, 2));
+    //     const data = await fs.promises.readFile(this.path, "utf-8");
+    //     return JSON.parse(data);
+    //   } catch (error) {
+    //     throw new Error("Error al escribir el archivo");
+    //   }
+    // }
   }
 
   async getAllFile() {
@@ -112,4 +113,4 @@ idAvailable(array){
   }
 }
 
-module.exports = FileContainer;
+export default ContainerFs;
