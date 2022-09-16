@@ -1,6 +1,6 @@
 import express from "express"
 import mainRouter from "./routes/mainRouter.js"
-// import connectDB from './dataBase/mongoDB/connection'
+import connectDB from './databases/mongoDB/connection.js'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT;
-//  connectDB()
+connectDB()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

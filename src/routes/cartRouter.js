@@ -4,7 +4,7 @@ const {
     createCart,
     deleteCartById,
     getCartById,
-    getProductsByCartId,
+    addProductsToCart,
     deleteProductInCart
 } = await import('../controllers/Cart.controller.js')
 
@@ -14,7 +14,7 @@ router.delete("/:id", deleteCartById);
 
 router.get("/:id/productos", getCartById);
 
-router.post("/:id/productos", getProductsByCartId);
+router.post("/:id/productos", addProductsToCart);
 
 router.delete("/:id/productos/:id_prod", deleteProductInCart);
 

@@ -6,7 +6,10 @@ let cartDao
 
 switch ('fs'){
     case 'mongodb':
-
+        const { default: ProductsDaoMongoDb } = await import('../daos/products/ProductsDaoMongoDb.js')
+        const { default: CartsDaoMongoDb } =  await import('../daos/carts/CartsDaoMongoDb.js')
+        productsDao = new ProductsDaoMongoDb();
+        cartDao = new CartsDaoMongoDb();
         break;
 
     case 'fs':

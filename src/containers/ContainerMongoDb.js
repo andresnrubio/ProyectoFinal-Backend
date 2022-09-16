@@ -1,113 +1,62 @@
+import mongoose from 'mongoose'
+
 class ContainerMongoDb {
-    constructor(path) {
-      this.path = path;
+  constructor(name, schema) {
+    let modelSchema = new mongoose.Schema(schema,
+      { timestamps: true }
+    )
+    this.collection = mongoose.model(name, modelSchema)
+  }
+
+  async getAllFile() {
+    try {
+      const data = await this.collection.find()
+      return data;
     }
-  
-  
-  idAvailable(array){
-      const sortedArray = array
-        .slice() 
-        .sort(function (a, b) {return a.id - b.id});
-      let previousId = 0;
-      for (let element of sortedArray) {
-        if (element.id != (previousId + 1)) {
-          return previousId + 1;
-        }
-        previousId = element.id;
-      }
-      return previousId + 1;
-    }
-  
-    async readFile() {
-      if (fs.existsSync(this.path)) {
-        try {
-          const data = await fs.promises.readFile(this.path, "utf-8");
-          return JSON.parse(data);
-        } catch (error) {
-          throw new Error("Error al leer archivo");
-        }
-      } else {
-        try {
-          await fs.promises.writeFile(this.path, JSON.stringify([], null, 2));
-          const data = await fs.promises.readFile(this.path, "utf-8");
-          return JSON.parse(data);
-        } catch (error) {
-          throw new Error("Error al escribir el archivo");
-        }
-      }
-    }
-  
-    async getAllFile() {
-      try {
-        const data = await this.readFile();
-        return data;
-      } catch (error) {
-        throw new Error("Error al obtener archivo");
-      }
-    }
-  
-    async saveInFile(element) {
-      if(element.id){
-        const data = await this.readFile();
-        const newData = [...data, element];
-        newData.sort((a, b) => a.id - b.id)
-        await fs.promises.writeFile(this.path, JSON.stringify(newData, null, 2));
-      }else{
-        try {
-          const data = await this.readFile();
-        const available = this.idAvailable(data);
-        const id = available
-  
-        const objectToAdd = { ...element, id: id};
-        const newData = [...data, objectToAdd];
-        await fs.promises.writeFile(this.path, JSON.stringify(newData, null, 2));
-        return objectToAdd;
-      } catch (error) {
-        throw new Error("Error al guardar archivo");
-      }}
-    }
-  
-    async deleteAllFile() {
-      try {
-        await fs.promises.writeFile(this.path, JSON.stringify([], null, 2));
-      } catch (error) {
-        throw new Error("Error al borrar archivo");
-      }
-    }
-  
-    async getById(id) {
-      try {
-        let elementsArray = await this.readFile();
-        const foundElement = elementsArray.find((elem) => elem.id === id);
-        if (foundElement !== undefined) {
-          return foundElement;
-        } else {
-          return null;
-        }
-      } catch (error) {
-        throw new Error("Error al obtener id");
-      }
-    }
-  
-    async deleteById(id) {
-      try {
-        let dataArch = await this.readFile();
-        let element = dataArch.find((elem) => elem.id === Number(id));
-           if (element) {
-          const dataArchFiltrado = dataArch.filter((elem) => elem.id !== Number(id));
-          await this.saveInFile(dataArchFiltrado);
-          await fs.promises.writeFile(
-            this.path,
-            JSON.stringify(dataArchFiltrado, null, 2),
-            "utf-8"
-          );
-        } else {
-          throw new Error("Elemento no encontrado");
-        }
-      } catch (error) {
-        throw new Error("Error al eliminar id");
-      }
+    catch (error) {
+      throw new Error("Error al realizar lectura" + error)
     }
   }
+
+  async getById(id) {
+    try {
+      const data = await this.collection.findById(id)
+      return data;
+    }
+    catch (error) {
+      throw new Error("Error al realizar lectura" + error)
+    }
+  }
+
+  async saveInFile(element) {
+    try {
+      const data = this.collection.create(element)
+      return data;
+    }
+    catch (error) {
+      throw new Error("Error al guardar en base de datos" + error)
+    }
+  }
+
+  async updateById(id, newValues) {
+    console.log(id)
+    console.log(newValues)
+    const filter = { _id: id };
+    const update = newValues;//{products:[{},{}]}
+    let data = await this.collection.findOneAndUpdate(filter, update, {
+      new: true
+    });
+    return data
+    }
+    
+    async deleteById(id) {
+        try {
+          await this.collection.deleteOne({id})
+        } catch (error) {
+          throw new Error("Error al eliminar id");
+        }
+     }
   
-  module.exports = ContainerMongoDb;
+}
+
+export default ContainerMongoDb;

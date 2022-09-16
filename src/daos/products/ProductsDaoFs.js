@@ -1,8 +1,7 @@
 import ContainerFs from "../../containers/ContainerFs.js";
 
-
 class ProductsDaoFs extends ContainerFs {
-    constructor(){
+    constructor() {
         super('./src/databases/fs/products.txt')
     }
 

@@ -80,7 +80,7 @@ idAvailable(array){
   async getById(id) {
     try {
       let elementsArray = await this.readFile();
-      const foundElement = elementsArray.find((elem) => elem.id === id);
+      const foundElement = elementsArray.find((elem) => elem.id === Number(id));
       if (foundElement !== undefined) {
         return foundElement;
       } else {
@@ -93,6 +93,12 @@ idAvailable(array){
 
   async deleteById(id) {
     try {
+      let foundProduct = await this.getById(id);
+        if (!foundProduct) {
+          res.status(404).json({
+            error: "NOT FOUND 404!!! producto no encontrado",
+          });
+        } else {
       let dataArch = await this.readFile();
       let element = dataArch.find((elem) => elem.id === Number(id));
          if (element) {
@@ -105,11 +111,35 @@ idAvailable(array){
         );
       } else {
         throw new Error("Elemento no encontrado");
-      }
+      }}
     } catch (error) {
       throw new Error("Error al eliminar id");
     }
   }
+
+  async updateById(id, newValues) {
+    let foundProduct = await this.getById(id);
+    if (!foundProduct) {
+        res.status(404).json({
+            error: "NOT FOUND 404!! producto no encontrado!!",
+        });
+    } else {
+        
+        for (const element in foundProduct) {
+            for (const elem in newValues) {
+                if (element === elem) {
+                    foundProduct[element] = newValues[elem];
+                }
+            }
+        }
+        foundProduct.timestamp = Date.now()
+        await this.deleteById(id);
+        await this.saveInFile(foundProduct);
+    }
+}
+
+
+
 }
 
 export default ContainerFs;

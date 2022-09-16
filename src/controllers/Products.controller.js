@@ -9,7 +9,7 @@ const getProducts = async (req, res = response) => {
         data: products,
       });
     } else {
-      let foundProduct = await productsContainer.getById(Number(req.params.id));
+      let foundProduct = await productsContainer.getById(req.params.id);
       if (!foundProduct) {
         res.status(404).json({
           error: "NOT FOUND 404 !! no existe ese ID",
@@ -24,7 +24,7 @@ const getProducts = async (req, res = response) => {
 
 const addProduct = async (req, res = response) => {
     const timestamp = Date.now()
-    let codigo = req.body.nombre.slice(0, 3) + timestamp;
+    let codigo = req.body.title.slice(0, 3) + timestamp;
     let product = {...req.body, codigo: codigo, timestamp:timestamp}
     let newProduct = await productsContainer.saveInFile(product);
     res.json({
@@ -33,56 +33,33 @@ const addProduct = async (req, res = response) => {
   }
 
 const updateProduct = async (req, res = response) => {
-    let foundProduct = await productsContainer.getById(Number(req.params.id));
-    if (!foundProduct) {
-      res.status(404).json({
-        error: "NOT FOUND 404!! producto no encontrado!!",
-      });
-    } else {
-      let newValues = req.body;
-      for (const element in foundProduct) {
-        for (const elem in newValues) {
-          if (element === elem) {
-            foundProduct[element] = newValues[elem];
-          }
-        }
-      }
-      foundProduct.timestamp = Date.now()
-      await productsContainer.deleteById(Number(req.params.id));
-      await productsContainer.saveInFile(foundProduct);
-  
+    productsContainer.updateById(req.params.id, req.body)
       res.json({
         msg: "El producto fue modificado correctamente",
       });
     }
-  }
+  
 
   const deleteProduct = async (req, res = response) => {
-    let foundProduct = await productsContainer.getById(Number(req.params.id));
-    if (!foundProduct) {
-      res.status(404).json({
-        error: "NOT FOUND 404!!! producto no encontrado",
-      });
-    } else {
-      await productsContainer.deleteById(req.params.id);
+      productsContainer.deleteById(req.params.id)
       res.json({
         msg: "Se ha eliminado el producto correctamente",
       });
-    }
+    
   }
 
 const  validateProduct = (req, res = response, next) => {
-    const { nombre, descripcion, precio, foto, stock } = req.body;
+    const { title, description, price, thumbnail, stock } = req.body;
   
-    if (!nombre || !descripcion || !precio || !foto || !stock) {
+    if (!title || !description || !price || !thumbnail || !stock) {
       res.json({ Error: "Faltan datos del producto" });
-    } else if (isNaN(precio)) {
+    } else if (isNaN(price)) {
       res.json({ Error: "El precio del producto debe ser de tipo number" });
     }else{
-    req.nombre = nombre;
-    req.descripcion = descripcion;
-    req.precio = precio;
-    req.foto = foto;
+    req.title = title;
+    req.description = description;
+    req.price = price;
+    req.thumbnail = thumbnail;
     req.stock = stock;
     next();
   }

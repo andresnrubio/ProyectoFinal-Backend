@@ -1,14 +1,13 @@
 import {
     response
 } from 'express'
+import CartDaoFs from '../daos/carts/CartsDaoFs.js';
 const { cartDao: cartContainer, productsDao : productsContainer} = await import('../daos/index.js')
 
 
 const createCart = async (req, res = response) => {
     try {
-        let cart = {
-            timestamp: Date.now()
-        }
+        let cart = {}
         let cartWithId = await cartContainer.saveInFile(cart);
         res.json({
             id: cartWithId.id,
@@ -22,7 +21,7 @@ const createCart = async (req, res = response) => {
 
 const getCartById = async (req, res = response) => {
     try {
-        const cart = await cartContainer.getById(Number(req.params.id));
+        const cart = await cartContainer.getById(req.params.id);
         res.json({
             data: cart.productos,
         })
@@ -33,27 +32,25 @@ const getCartById = async (req, res = response) => {
     }
 }
 
-const getProductsByCartId = async (req, res = response) => {
-    try {
-        const cart = await cartContainer.getById(Number(req.params.id));
-        const product = await productsContainer.getById(Number(req.body.id));
-        if (!product) {
+const addProductsToCart = async (req, res = response) => {
+    try{
+        const productToAdd = await productsContainer.getById(req.body.id)
+        const cart = await cartContainer.getById(req.params.id);
+        if (!productToAdd) {
             res.json({
                 error: `No existe producto con ese ID`,
             })
         } else {
-            if (cart.productos) {
-                cart.productos.push(product)
+            if (cart.products) {
+                cart.products.push(productToAdd)
             } else {
-                cart.productos = [product]
-            }
-            await cartContainer.deleteById(Number(req.params.id));
-            await cartContainer.saveInFile(cart);
-            res.json({
-                msg: `Producto agregado al carrito ${req.params.id}`
-            });
-        }
-    } catch {
+                cart.products = [product]
+            }}
+       const newCart = await cartContainer.addProducts(req.params.id, cart.products)
+       res.json({
+        data: newCart.products,
+    })
+    }catch {
         res.json({
             error: `Error al agregar producto`,
         })
@@ -61,15 +58,15 @@ const getProductsByCartId = async (req, res = response) => {
 }
 
 const deleteProductInCart = async (req, res = response) => {
-    const cart = await cartContainer.getById(Number(req.params.id));
-    const product = await productsContainer.getById(Number(req.params.id_prod));
+    const cart = await cartContainer.getById(req.params.id);
+    const product = await productsContainer.getById(req.params.id_prod);
     if (product) {
         let newListProducts = [];
         newListProducts = cart.productos.filter(
-            (producto) => producto.id != Number(req.params.id_prod)
+            (producto) => producto.id != req.params.id_prod
         );
         cart.productos = newListProducts;
-        await cartContainer.deleteById(Number(req.params.id));
+        await cartContainer.deleteById(req.params.id);
         await cartContainer.saveInFile(cart);
 
         res.json({
@@ -83,7 +80,7 @@ const deleteProductInCart = async (req, res = response) => {
 }
 const deleteCartById = async (req, res = response) => {
     try {
-        await cartContainer.deleteById(Number(req.params.id));
+        await cartContainer.deleteById(req.params.id);
         res.json({
             msg: `Carrito Eliminado`,
         });
@@ -98,6 +95,6 @@ export {
     createCart,
     deleteCartById,
     getCartById,
-    getProductsByCartId,
+    addProductsToCart,
     deleteProductInCart
 }
