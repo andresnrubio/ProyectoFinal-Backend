@@ -18,8 +18,12 @@ switch ('mongodb'){
         productsDao = new ProductsDaoFs();
         cartDao = new CartDaoFs();
         break;
+        
     case 'firebase':
-
+        const { default: ProductsDaoFirebase } = await import('../daos/products/ProductsDaoFirebase.js')
+        const { default: CartDaoFirebase } =  await import('../daos/carts/CartsDaoFirebase.js')
+        productsDao = new ProductsDaoFirebase();
+        cartDao = new CartDaoFirebase();
         break;
 
     default:

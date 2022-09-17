@@ -1,6 +1,5 @@
 import express from "express"
 import mainRouter from "./routes/mainRouter.js"
-import connectDB from './databases/mongoDB/connection.js'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -12,6 +11,21 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT;
+
+//*---------------------------------------*//
+//*------  Conections to Databases -------*//
+//*---------------------------------------*//
+
+//* Conexion a Firebase
+import admin from 'firebase-admin'
+import serviceAcount from "./databases/firebase/ecommerce-1375e-firebase-adminsdk-huxng-bc5a81d13b.json" assert {type: 'json'};
+admin.initializeApp({
+  credential:admin.credential.cert(serviceAcount),
+  // databaseURL:
+})
+
+//* Conexion a Mongo
+import connectDB from './databases/mongoDB/connection.js'
 connectDB()
 
 app.use(express.json());

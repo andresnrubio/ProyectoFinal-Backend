@@ -36,8 +36,8 @@ class CartsDaoMongoDb extends ContainerMongoDb {
         } catch (error) {
             throw new Error("Error al eliminar el producto del carrito");
         }
-
     }
+
 }
 
 export default CartsDaoMongoDb;
