@@ -4,7 +4,7 @@ let cartDao
 //! FALTA PARA LA ENTREGA HACER ESTO!!!
 //TODO Realizar switch con process.env.DB_SERVICE
 
-switch ('fs'){
+switch ('mongodb'){
     case 'mongodb':
         const { default: ProductsDaoMongoDb } = await import('../daos/products/ProductsDaoMongoDb.js')
         const { default: CartsDaoMongoDb } =  await import('../daos/carts/CartsDaoMongoDb.js')

@@ -8,5 +8,15 @@
     "codigo": "Tij1663291466261",
     "timestamp": 1663291466261,
     "id": 2
+  },
+  {
+    "title": "Tijeras",
+    "price": 150,
+    "description": "Sirven para cortar",
+    "thumbnail": "https://cdn2.iconfinder.com/data/icons/flat-icons-19/512/Sclssors.png",
+    "stock": 5,
+    "codigo": "Tij1663366360896",
+    "timestamp": 1663366360896,
+    "id": 1
   }
 ]

@@ -124,7 +124,6 @@ idAvailable(array){
             error: "NOT FOUND 404!! producto no encontrado!!",
         });
     } else {
-        
         for (const element in foundProduct) {
             for (const elem in newValues) {
                 if (element === elem) {

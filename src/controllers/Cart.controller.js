@@ -1,13 +1,15 @@
 import {
     response
 } from 'express'
-import CartDaoFs from '../daos/carts/CartsDaoFs.js';
-const { cartDao: cartContainer, productsDao : productsContainer} = await import('../daos/index.js')
+const {
+    cartDao: cartContainer,
+    productsDao: productsContainer
+} = await import('../daos/index.js')
 
 
 const createCart = async (req, res = response) => {
     try {
-        let cart = {}
+        let cart = cartContainer.newCart();
         let cartWithId = await cartContainer.saveInFile(cart);
         res.json({
             id: cartWithId.id,
@@ -23,7 +25,7 @@ const getCartById = async (req, res = response) => {
     try {
         const cart = await cartContainer.getById(req.params.id);
         res.json({
-            data: cart.productos,
+            data: cart.products,
         })
     } catch {
         res.json({
@@ -33,7 +35,7 @@ const getCartById = async (req, res = response) => {
 }
 
 const addProductsToCart = async (req, res = response) => {
-    try{
+    try {
         const productToAdd = await productsContainer.getById(req.body.id)
         const cart = await cartContainer.getById(req.params.id);
         if (!productToAdd) {
@@ -41,16 +43,13 @@ const addProductsToCart = async (req, res = response) => {
                 error: `No existe producto con ese ID`,
             })
         } else {
-            if (cart.products) {
-                cart.products.push(productToAdd)
-            } else {
-                cart.products = [product]
-            }}
-       const newCart = await cartContainer.addProducts(req.params.id, cart.products)
-       res.json({
-        data: newCart.products,
-    })
-    }catch {
+            cart.products.push(productToAdd)
+        }
+        const newCart = await cartContainer.changeCartProducts(req.params.id, cart.products)
+        res.json({
+            data: newCart.products,
+        })
+    } catch {
         res.json({
             error: `Error al agregar producto`,
         })
@@ -58,26 +57,15 @@ const addProductsToCart = async (req, res = response) => {
 }
 
 const deleteProductInCart = async (req, res = response) => {
-    const cart = await cartContainer.getById(req.params.id);
-    const product = await productsContainer.getById(req.params.id_prod);
-    if (product) {
-        let newListProducts = [];
-        newListProducts = cart.productos.filter(
-            (producto) => producto.id != req.params.id_prod
-        );
-        cart.productos = newListProducts;
-        await cartContainer.deleteById(req.params.id);
-        await cartContainer.saveInFile(cart);
-
-        res.json({
-            msg: "Producto eliminado del carrito correctamente"
-        });
-    } else {
-        res.json({
-            msg: "Producto no existente"
-        })
-    }
+    //TODO desde aca enviar id y productos con nuevo array lista de productos {products:[{},{}]}
+    await cartContainer.delCartProducts(req.params.id, req.params.id_prod)
+    res.json({
+        msg: "Producto eliminado del carrito correctamente"
+    });
 }
+
+
+
 const deleteCartById = async (req, res = response) => {
     try {
         await cartContainer.deleteById(req.params.id);

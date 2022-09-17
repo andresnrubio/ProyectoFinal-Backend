@@ -39,10 +39,8 @@ class ContainerMongoDb {
   }
 
   async updateById(id, newValues) {
-    console.log(id)
-    console.log(newValues)
     const filter = { _id: id };
-    const update = newValues;//{products:[{},{}]}
+    const update = newValues; //{products:[{},{}]}
     let data = await this.collection.findOneAndUpdate(filter, update, {
       new: true
     });
