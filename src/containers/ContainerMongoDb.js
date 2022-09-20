@@ -1,3 +1,7 @@
+//* Conection to MongoDb */
+import connectDB from './databases/mongoDB/connection.js'
+connectDB()
+
 import mongoose from 'mongoose'
 
 class ContainerMongoDb {

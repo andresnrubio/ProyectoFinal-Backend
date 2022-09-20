@@ -1,10 +1,13 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 let productsDao
 let cartDao
 
 //! FALTA PARA LA ENTREGA HACER ESTO!!!
 //TODO Realizar switch con process.env.DB_SERVICE
 
-switch ('firebase'){
+switch (process.env.DB_SERVICE){
     case 'mongodb':
         const { default: ProductsDaoMongoDb } = await import('../daos/products/ProductsDaoMongoDb.js')
         const { default: CartsDaoMongoDb } =  await import('../daos/carts/CartsDaoMongoDb.js')

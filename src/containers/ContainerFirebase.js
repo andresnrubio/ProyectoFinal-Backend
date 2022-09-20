@@ -1,5 +1,5 @@
+//* Conection to Firebase */
 import admin from 'firebase-admin'
-console.log(process.env.FIREBASE_PATH)
 import serviceAcount from "../databases/firebase/ecommerce-1950a-firebase-adminsdk-fxl4z-61219de2da.json" assert {
     type: 'json'
 };
