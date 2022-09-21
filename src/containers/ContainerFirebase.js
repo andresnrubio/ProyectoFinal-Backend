@@ -1,8 +1,8 @@
 //* Conection to Firebase */
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
 import admin from 'firebase-admin'
-import serviceAcount from "../databases/firebase/ecommerce-1950a-firebase-adminsdk-fxl4z-61219de2da.json" assert {
-    type: 'json'
-};
+const serviceAcount = require("../databases/firebase/ecommerce-1950a-firebase-adminsdk-fxl4z-61219de2da.json") 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAcount)
 })
@@ -31,7 +31,10 @@ class ContainerFirebase {
         try {
             const doc = this.query.doc(id)
             const response = await doc.get()
-            return response.data()
+            return {
+                id: response.id,
+                ...response.data()
+                }
         } catch (error) {
             throw new Error("Error al realizar lectura" + error)
         }
@@ -39,11 +42,9 @@ class ContainerFirebase {
 
     async saveInFile(element) {
         try {
-            const data = await this.query.doc()
-            await data.create(element).then(
-                res=>console.log(res)
-            )
-            return "Prueba"
+            const data = await this.query.add(element)
+            return data
+            return "Producto cargado correctamente"
         } catch (error) {
             throw new Error("Error al guardar en base de datos" + error)
         }
