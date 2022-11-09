@@ -1,5 +1,5 @@
 //* Conection to MongoDb */
-import connectDB from './databases/mongoDB/connection.js'
+import connectDB from '../databases/mongoDB/connection.js'
 connectDB()
 
 import mongoose from 'mongoose'

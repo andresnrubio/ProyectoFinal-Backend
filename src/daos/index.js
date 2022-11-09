@@ -4,9 +4,6 @@ dotenv.config()
 let productsDao
 let cartDao
 
-//! FALTA PARA LA ENTREGA HACER ESTO!!!
-//TODO Realizar switch con process.env.DB_SERVICE
-
 switch (process.env.DB_SERVICE){
     case 'mongodb':
         const { default: ProductsDaoMongoDb } = await import('../daos/products/ProductsDaoMongoDb.js')

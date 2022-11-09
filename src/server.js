@@ -16,8 +16,55 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "public"));
 
-app.get("/", (req, res) => {});
+//* ---------------------------------- */
+//* -------- Configuracion HBS ------- */
+//* ---------------------------------- */
+
+import handlebars from "express-handlebars";
+const layoutsFolderPath = path.resolve(__dirname, "./views/layouts");
+const defaultLayoutPath = path.resolve(__dirname, "./views/layouts/index.hbs");
+
+app.set("views", "./views");
+app.set("view engine", "hbs");
+
+app.engine(
+  "hbs",
+  handlebars.engine({
+    layoutsDir: layoutsFolderPath,
+    extname: ".hbs",
+    defaultLayout: defaultLayoutPath,
+  })
+);
+
+//* ---------------------------------- */
+//* ------------ Session ------------- */
+//* ---------------------------------- */
+
+import session from "express-session"
+
+//* ------- Mongo ---------*/
+// const MongoStore = require('connect-mongo')
+// const advancedOptions = {useNewUrlParser:true, useUnifiedTopology: true}
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || '123456',
+    resave: true,
+    rolling:true,
+    saveUninitialized: true,
+    cookie:{
+      maxAge:10000
+    }
+}))
+
+// app.use(cookieParser(process.env.COOKIES_SECRET || '123456'))
+
+//* ---------------------------------- */
+
 app.use("/api", mainRouter);
+
+app.get("/", (req, res) => {
+  res.render("main", { layouts: "index"});
+});
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
