@@ -1,5 +1,4 @@
 import ContainerMongoDb from '../../containers/ContainerMongoDb.js';
-import mongoose from 'mongoose';
 // import productModel from '../../databases/models/products.model.js'
 
 //TODO aca se hace el llamado del schemma desde el model 

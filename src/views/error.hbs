@@ -1,0 +1,22 @@
+
+{{#if login}}
+  <div class="d-flex justify-content-center flex-column align-items-center " style="height: 100vh; padding-top:3rem">
+   <div class="bg-danger text-dark bg-opacity-50 shadow-sm  rounded-2 border" style="width: 30rem; padding: 2rem;">
+     <h2>Error en los datos ingresados</h2>
+     <br>
+     <p style="width: 25rem;">Regresar a <span><a href="/login">login</a></span></p>
+   </div>
+  </div>
+{{/if}}
+
+{{#if signup}}
+  <div class="d-flex justify-content-center flex-column align-items-center " style="height: 100vh; padding-top:3rem">
+     <div class="bg-warning text-dark bg-opacity-50 shadow-sm  rounded-2 border" style="width: 30rem; padding: 2rem;">
+     <h2>Usuario ya existente</h2>
+     <br>
+     <p style="width: 25rem;">Regresar a <span><a href="/login">registro</a></span></p>
+   </div>
+  </div>
+{{/if}}
+
+

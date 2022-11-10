@@ -1,19 +1,15 @@
-import ContainerMongoDb from '../../containers/ContainerMongoDb.js';
-// import productModel from '../../databases/models/products.model.js'
-//TODO aca se hace el llamado del schemma desde el model 
+import ContainerFirebase from "../../containers/ContainerFirebase.js";
 
-class CartsDaoMongoDb extends ContainerMongoDb {
+class CartsDaoFirebase extends ContainerFirebase {
     constructor() {
-        super('carts', {
-            products: {
-                type: Array,
-                max: 100,
-            }
-        })
+        super('carts')
     }
 
     newCart() {
-        return {}
+        let cart = {}
+        cart.timestamp = Date.now()
+        cart.products = []
+        return cart
     }
 
     async changeCartProducts(idCart, newProductsList) {
@@ -29,8 +25,8 @@ class CartsDaoMongoDb extends ContainerMongoDb {
 
     async delCartProducts(idCart, idProductToDelete) {
         try {
-        this.getById(idCart).then((data)=>{
-            const updatedList = data.products.filter(product => product._id != idProductToDelete)
+            this.getById(idCart).then((data)=>{
+            const updatedList = data.products.filter(product => product.id != idProductToDelete)
             this.updateById(idCart, {products: updatedList})
         })
         } catch (error) {
@@ -40,4 +36,5 @@ class CartsDaoMongoDb extends ContainerMongoDb {
 
 }
 
-export default CartsDaoMongoDb;
+
+export default CartsDaoFirebase;

@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cierre de sesion exitoso</h5>
+      </div>
+      <div class="modal-body">
+<h2>Hasta luego {{session.username}}!</h2>      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="w-100 d-flex justify-content-center"
+  style="height: 50px, margin:2rem"
+>
+  <div
+    id="header"
+    class="w-75 p-2 d-flex justify-content-between"
+    style="background-color: lightgray;"
+  >
+    <h2 id="headerTitle">Bienvenido {{session.username}}</h2>
+    <form  action="/logout" method="GET">
+      <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Logout
+      </button>
+      </form>
+  </div>
+</div>
+
+
+

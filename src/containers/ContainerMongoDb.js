@@ -1,3 +1,7 @@
+//* Conection to MongoDb */
+import connectDB from '../databases/mongoDB/connection.js'
+connectDB()
+
 import mongoose from 'mongoose'
 
 class ContainerMongoDb {
@@ -39,6 +43,7 @@ class ContainerMongoDb {
   }
 
   async updateById(id, newValues) {
+    try{
     const filter = { _id: id };
     const update = newValues; //{products:[{},{}]}
     let data = await this.collection.findOneAndUpdate(filter, update, {
@@ -46,6 +51,9 @@ class ContainerMongoDb {
     });
     return data
     }
+    catch(error){
+        throw new Error("Error al actualizar base de datos" + error)
+    }}
     
     async deleteById(id) {
         try {

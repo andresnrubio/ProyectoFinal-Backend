@@ -64,8 +64,6 @@ const deleteProductInCart = async (req, res = response) => {
     });
 }
 
-
-
 const deleteCartById = async (req, res = response) => {
     try {
         await cartContainer.deleteById(req.params.id);
