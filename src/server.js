@@ -1,5 +1,5 @@
 import express from "express"
-import mainRouter from "./routes/mainRouter.js"
+import mainRouter from "./routes/index.routes.js";
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -14,7 +14,11 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "public"));
+// app.use(express.static(__dirname + "public"));
+// app.use(express.static(path.join(__dirname, "public")));
+// console.log(path.join(__dirname, "public"))
+app.use(express.static("public"));
+
 
 //* ---------------------------------- */
 //* -------- Configuracion HBS ------- */
@@ -24,8 +28,8 @@ import handlebars from "express-handlebars";
 const layoutsFolderPath = path.resolve(__dirname, "./views/layouts");
 const defaultLayoutPath = path.resolve(__dirname, "./views/layouts/index.hbs");
 
-app.set("views", "./views");
 app.set("view engine", "hbs");
+app.set("views", path.resolve(__dirname,"./views"));
 
 app.engine(
   "hbs",
@@ -60,7 +64,9 @@ app.use(session({
 
 //* ---------------------------------- */
 
-app.use("/api", mainRouter);
+// app.use("/api", mainRouter);
+app.use("/", mainRouter);
+
 
 app.get("/", (req, res) => {
   res.render("main", { layouts: "index"});

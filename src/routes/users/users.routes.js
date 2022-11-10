@@ -1,4 +1,4 @@
-import express from "express"
+import express from "express";
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
 
 const { Router } = express;
@@ -28,13 +28,12 @@ router.get("/signup", async (req, res) => {
 
 
 router.post("/signup", passport.authenticate('signup', {
-  failureRedirect: '/api/users/login'
+  failureRedirect: '/signuperror'
 }), (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;
   res.status(200).redirect("/api/productos");
 })
-
 
 
 router.get("/logout", authMiddleware, async (req, res) => {

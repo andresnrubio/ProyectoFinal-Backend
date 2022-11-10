@@ -21,9 +21,11 @@
     style="background-color: lightgray;"
   >
     <h2 id="headerTitle">Bienvenido {{session.username}}</h2>
-      <button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop"onclick="logout()">
+    <form  action="/logout" method="GET">
+      <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Logout
       </button>
+      </form>
   </div>
 </div>
 

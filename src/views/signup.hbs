@@ -1,0 +1,20 @@
+  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100vh; padding-top:3rem">    
+    <form class="bg-light shadow-sm  rounded-2 border " style="width: 30rem; padding: 2rem;" action="/signup" method="POST">
+      <h1>Registro</h1>
+      <div class="mb-3">
+        <label for="InputEmail" class="form-label">Correo Electronico</label>
+        <input type="email" class="form-control" id="InputEmail" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="InputUser" class="form-label">Nombre de usuario</label>
+        <input type="text" class="form-control" id="InputUser" name="username">
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="InputPassword" name="password">
+      </div>
+      <button type="submit" class="btn btn-primary" id="LoginButton">Ingresar</button>
+      <div id="loginError" class="form-text"></div>
+      <p style="width: 25rem;">Ya estas registrado? haz click <span><a href="/login">aqui</a></span></p>
+    </form>
+  </div>
