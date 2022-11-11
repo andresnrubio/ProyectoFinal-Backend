@@ -1,6 +1,6 @@
 import express from "express";
 const { Router } = express;
-import fileContainer from "../../containers/ContainerMongoDb.js";
+const { productsDao: fileContainer } =  await import("../../daos/index.js")
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
 const router = Router();
 

@@ -1,6 +1,6 @@
 import express from "express";
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
-
+import upload from "../../utils/multer.js";
 const { Router } = express;
 import passport from '../../middlewares/passport/passport.middleware.js';
 
@@ -60,4 +60,14 @@ router.get("/signuperror", (req,res)=>{
   res.render("error", { layouts: "index", signup: true });
 })
 
+router.post("/uploadavatar", upload.single('avatar'), (req, res, next) =>{
+  console.log(req)
+const file = req.file
+if (!file){
+  const error = new Error('Por favor cargue un archivo')
+  error.httpStatusCode = 400
+  return next(error)
+}
+res.send(file)
+})
 export default router;
