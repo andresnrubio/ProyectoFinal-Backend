@@ -37,7 +37,6 @@ const schema = {
   },
   avatar: {
     type: String,
-    required: true,
   },
 }
 
@@ -125,4 +124,4 @@ passport.deserializeUser((id, done) => {
 });
 
 
-export default passport;
+export {passport, usersCollection};

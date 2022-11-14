@@ -3,7 +3,7 @@ import multer from "multer"
 
 let storage = multer.diskStorage({
     destination: (req, _file, cb) => {
-      cb(null,'src/public/uploads/')
+      cb(null,'src/public/img/')
     },
     filename: (req, file, cb) =>{
       cb(null, `${Date.now()}-${file.originalname}`)

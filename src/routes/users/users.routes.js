@@ -2,7 +2,8 @@ import express from "express";
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
 import upload from "../../utils/multer.js";
 const { Router } = express;
-import passport from '../../middlewares/passport/passport.middleware.js';
+import { passport, usersCollection } from '../../middlewares/passport/passport.middleware.js';
+import mongoose from 'mongoose'
 
 const router = Router();
 
@@ -32,7 +33,8 @@ router.post("/signup", passport.authenticate('signup', {
 }), (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;
-  res.status(200).redirect("/api/productos");
+  res.render("avatarUpload", { layouts: "index" });
+  // res.status(200).redirect("/api/productos");
 })
 
 
@@ -60,14 +62,14 @@ router.get("/signuperror", (req,res)=>{
   res.render("error", { layouts: "index", signup: true });
 })
 
-router.post("/uploadavatar", upload.single('avatar'), (req, res, next) =>{
-  console.log(req)
-const file = req.file
-if (!file){
-  const error = new Error('Por favor cargue un archivo')
-  error.httpStatusCode = 400
-  return next(error)
-}
-res.send(file)
+router.post("/uploadavatar", upload.single('avatar'), async (req, res, next) =>{
+  const file = req.file
+  if (!file){
+    const error = new Error('Por favor cargue un archivo')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+  await usersCollection.updateOne({username: `${req.session.username}`}, {avatar: file.filename })
+  res.status(200).redirect("/api/productos");
 })
 export default router;

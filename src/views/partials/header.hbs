@@ -6,7 +6,7 @@
         <h5 class="modal-title" id="staticBackdropLabel">Cierre de sesion exitoso</h5>
       </div>
       <div class="modal-body">
-<h2>Hasta luego {{session.username}}!</h2>      </div>
+      <h2>Hasta luego {{session.username}}!</h2>      </div>
     </div>
   </div>
 </div>
@@ -21,13 +21,12 @@
     style="background-color: lightgray;"
   >
     <h2 id="headerTitle">Bienvenido {{session.username}}</h2>
-    <form  action="/logout" method="GET">
+    <img src="/img/1668385496956-css3.png" alt="Aca va el avatar">
+    <form action="/logout" method="GET">
       <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Logout
       </button>
       </form>
   </div>
 </div>
-
-
 

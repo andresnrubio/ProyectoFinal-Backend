@@ -1,0 +1,10 @@
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100vh; padding-top:3rem">    
+    <div class="bg-light shadow-sm  rounded-2 border ">
+        <form style="width: 30rem; padding: 2rem;" class="d-flex flex-column" action="/uploadavatar" enctype="multipart/form-data" method="POST">
+          <label for="InputAvatar" class="form-label">Foto de perfil</label>
+          <input type="file" id="InputAvatar" name="avatar" >
+          <input type="submit" value="Subir Foto" id="uploadAvatarButton"/>
+        </form>
+        <div id="loginError" class="form-text"></div>
+    </div>
+</div>
