@@ -1,6 +1,5 @@
 import express from "express"
 import mainRouter from "./routes/index.routes.js";
-
 import * as dotenv from 'dotenv'
 dotenv.config()
 import path from 'path';
@@ -12,10 +11,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT;
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-
 
 //* ---------------------------------- */
 //* -------- Configuracion HBS ------- */
