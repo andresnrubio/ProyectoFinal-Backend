@@ -23,6 +23,7 @@
                 {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
                 <td class="text-center align-middle">
                   <form action="/api/cart/{{_id}}" method="POST">
+                  <input name="product" value={{this}} style="display: none;"/>
                     <button type="submit" class="btn btn-primary btn-sm">
                       Agregar al carrito
                     </button>

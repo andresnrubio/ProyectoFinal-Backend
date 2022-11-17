@@ -24,6 +24,12 @@ html: `<div><h2>Se ha registrado un nuevo usuario</h2><h4>Nombre de Usuario: <sp
 console.log("Message sent: %s", info.messageId);
 }
 
+const stringCarrito = (cart) => {
+    // TODO funcion de enlistado de productos de carrito y conversion a html para correo
+
+return "<h1>Carrito</h1>"
+}
+
 async function avisoNuevoCarrito(user, cart) {
 
 let transporter = nodemailer.createTransport({
@@ -40,7 +46,7 @@ from: 'API notifications <NotificacionesAPI@backend.com>',
 to: process.env.NODEMAILER_ADMIN_EMAIL,
 subject: `Nuevo pedido de: ${user}`,
 text: "Nuevo pedido",
-html: `<div>Aca va el carrito</div>`,
+html: stringCarrito,
 });
 
 console.log("Message sent: %s", info.messageId);

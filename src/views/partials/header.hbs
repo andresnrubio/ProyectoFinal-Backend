@@ -21,16 +21,30 @@
       class="w-100"
   >
     <nav class="navbar navbar-expand-lg d-flex flex-row h-100">
-      <div class="container-fluid h-100">
+      <div class="container-fluid h-100" style="align-content: center;">
         <a class="navbar-brand" href="#">Eccomerce CoderHouse</a>
-          <form class="d-flex" role="search">
+          <form class="d-flex" role="search" style="margin: 0">
             <input class="me-2" type="search" placeholder="Ingrese Producto" aria-label="Search">
             {{!-- <button class="btn btn-outline-success" type="submit">Buscar productos</button> --}}
           </form>
-          <form action="/logout" method="GET">
-          <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Logout
-          </button>
+          {{log productsButton}}
+          {{#if productsButton}}
+            <form action="/api/productos" method="GET" style="margin: 0">
+              <button type="submit" class="btn btn-primary btn-md">
+                Ver mas productos
+              </button>
+            </form>
+            {{else}}
+            <form action="/api/cart" method="GET" style="margin: 0">
+              <button type="submit" class="btn btn-primary btn-md">
+                Carrito
+              </button>
+            </form>
+          {{/if}}
+          <form action="/logout" method="GET" style="margin: 0">
+            <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Logout
+            </button>
           </form>
         </div>
       </div>
