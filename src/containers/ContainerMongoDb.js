@@ -1,5 +1,5 @@
 //* Conection to MongoDb */
-import connectDB from '../databases/mongoDB/connection.js'
+import connectDB from '../DB/mongoDB/connection.js'
 connectDB()
 
 import mongoose from 'mongoose'
@@ -57,7 +57,7 @@ class ContainerMongoDb {
     
     async deleteById(id) {
         try {
-          await this.collection.deleteOne({id})
+          await this.collection.deleteOne({ _id: id })
         } catch (error) {
           throw new Error("Error al eliminar id");
         }

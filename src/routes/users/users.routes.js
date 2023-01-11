@@ -14,7 +14,7 @@ router.get("/login", authMiddleware, async (req, res) => {
 
 
 router.post("/login", passport.authenticate('login', 
-  {failureRedirect: '/autherror'}
+{failureRedirect: '/autherror'}
 ), (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;

@@ -15,28 +15,28 @@
     </tr>
   </thead>
   <tbody id="listadoProductos">
-    {{#each products}}
-      {{#each this}}
-        {{#if this}}
-          {{#if this.titulo}}
-            <tr class="text-center align-middle">
-                {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
-                <td class="text-center align-middle">
-                  <form action="/api/cart/{{_id}}" method="POST">
-                  <input name="product" value={{this}} style="display: none;"/>
-                    <button type="submit" class="btn btn-primary btn-sm">
-                      Agregar al carrito
-                    </button>
-                  </form>
-                </td>
-                <td class="text-center align-middle">{{titulo}}</td>
-                <td class="text-center align-middle">$ {{precio}}</td>
-                <td class="text-center align-middle"><img src="{{miniatura}}" alt="{{titulo}}" style="width:3rem"></td>
-            </tr>
+    <form action="/api/cart/{{cart.id}}/productos" method="POST">
+      {{#each products}}
+        {{#each this}}
+          {{#if this}}
+            {{#if this.titulo}}
+              <tr class="text-center align-middle">
+                  {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
+                  <td class="text-center align-middle">
+                    <input name="product" value={{_id}} style="display: none;"/>
+                      <button type="submit" class="btn btn-primary btn-sm">
+                        Agregar al carrito
+                      </button>
+                  </td>
+                  <td class="text-center align-middle">{{titulo}}</td>
+                  <td class="text-center align-middle">$ {{precio}}</td>
+                  <td class="text-center align-middle"><img src="{{miniatura}}" alt="{{titulo}}" style="width:3rem"></td>
+              </tr>
+            {{/if}}
           {{/if}}
-        {{/if}}
+        {{/each}}
       {{/each}}
-    {{/each}}
+    </form>
   </tbody>
 </table>
 </div>
