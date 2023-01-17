@@ -11,7 +11,19 @@ createCart = async (username) =>{
     } catch (error) {
         throw new Error("Error al crear el carrito");
     }
+}
+
+checkUserCart = async (user) =>{
+    try {
+        const cart = await this.getCartByUser(user)
+        if (!cart){
+            return false
+        }
+        return cart.id
+    } catch (error) {
+        throw new Error("Error al obtener el carrito");
     }
+}
 
 getById = async (id) => {
     try {
@@ -22,6 +34,14 @@ getById = async (id) => {
     }
 }
 
+getCartByUser = async (user) => {
+    try {
+        let foundElement = await cartContainer.getCartByUser(user);
+            return foundElement;
+    } catch (error) {
+        throw new Error("Error al obtener id");
+    }
+}
 
 addProduct = async (cartId, productId, username) => {
     try {

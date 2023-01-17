@@ -10,6 +10,9 @@ class CartsDaoMongoDb extends ContainerMongoDb {
             user: {
                 type: String,
                 required: true,
+            }, 
+            address: {
+                type: String
             }
         })
     }
@@ -38,6 +41,16 @@ class CartsDaoMongoDb extends ContainerMongoDb {
         } catch (error) {
             throw new Error("Error al eliminar el producto del carrito");
         }
+    }
+
+    async findByBuyer(user){
+        try {
+            const cart = await this.collection.findOne({ user: user }).exec()
+        return cart
+    }
+    catch (error) {
+        throw new Error("Error al buscar el carrito")
+    }
     }
 
 }

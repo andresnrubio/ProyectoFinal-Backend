@@ -6,6 +6,10 @@ import routerUsers from "./users/users.routes.js";
 
 const router = Router();
 
+router.get("/chat", (req, res) => {
+  res.render("chatView", { layouts: "index", session: req.session});
+})
+
 router.get("/", (req, res) => {
   res.render("main", { layouts: "index"});
 })

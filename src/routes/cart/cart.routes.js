@@ -8,7 +8,6 @@ const cartsControllerMethods = new cartsController()
 
 router.get("/", authMiddleware, async (req,res)=>{
   try {
-    console.log(req.session.passport.user)
     res.render("cart", { layouts: "index", session: req.session });
   } catch (error) {
     res.send(error);
@@ -26,3 +25,4 @@ router.post("/:id/productos", cartsControllerMethods.addProductsToCart);
 router.delete("/:id/productos/:id_prod", cartsControllerMethods.deleteProductFromCart);
 
 export default router;
+

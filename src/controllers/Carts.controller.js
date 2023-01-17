@@ -31,8 +31,9 @@ getCartById = async (req, res) => {
 
 addProductsToCart = async (req, res) => {
     try {
-        const response = await API.addProduct(req.params.id, req.body.product, req.session.username)
-        res.json({ data: response });
+        console.log(req.params)
+        // const response = await API.addProduct(req.params.id, req.body.product, req.session.username)
+        // res.json({ data: response });
     } catch {
         res.json({
             error: `Error al agregar producto`,

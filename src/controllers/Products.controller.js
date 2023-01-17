@@ -5,7 +5,7 @@ class productsController {
 
 renderMain = async (req, res) => {
     try {
-        let products = await API.getAllFile();
+        let products = await API.getAllFile();  
         res.render("main", { products, session: req.session })
     } catch (error) {
         res.send(error);

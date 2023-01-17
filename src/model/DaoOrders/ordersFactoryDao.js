@@ -1,16 +1,16 @@
-import productsDaoFs from "./productsDaoFs.js"
+import OrdersDaoMongoDb from "./OrdersDaoMongoDb.js"
 
-class productsFactoryDAO {
+class OrdersFactoryDAO {
     static get(type) {
         switch (type) {
             case 'fs':
                 return new productsDaoFs("./src/DB/fs/products.txt", [])
-            // case 'MONGO':
-            //     return new NoticiasDBMongoDAO('miBase', 'noticias')
+            case 'mongo':
+                return new OrdersDaoMongoDb()
             default:
                 return new productsDaoFs()
         }
     }
 }   
 
-export default productsFactoryDAO
+export default OrdersFactoryDAO
