@@ -22,7 +22,7 @@
   >
     <nav class="navbar navbar-expand-lg d-flex flex-row h-100">
       <div class="container-fluid h-100" style="align-content: center;">
-        <a class="navbar-brand" href="/api/productos">Eccomerce CoderHouse</a>
+        <a class="navbar-brand" href="/home">Eccomerce CoderHouse</a>
           <form class="d-flex" role="search" style="margin: 0">
             <input class="me-2" type="search" placeholder="Ingrese Producto" aria-label="Search">
             {{!-- <button class="btn btn-outline-success" type="submit">Buscar productos</button> --}}
@@ -32,15 +32,14 @@
                 Chat
               </button>
             </form>
-          {{log productsButton}}
           {{#if productsButton}}
-            <form action="/api/productos" method="GET" style="margin: 0">
+            <form action="/home" method="GET" style="margin: 0">
               <button type="submit" class="btn btn-primary btn-md">
                 Ver mas productos
               </button>
             </form>
             {{else}}
-            <form action="/api/cart" method="GET" style="margin: 0">
+            <form action="/cart" method="GET" style="margin: 0">
               <button type="submit" class="btn btn-primary btn-md">
                 Carrito
               </button>

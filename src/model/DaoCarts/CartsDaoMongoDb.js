@@ -10,9 +10,6 @@ class CartsDaoMongoDb extends ContainerMongoDb {
             user: {
                 type: String,
                 required: true,
-            }, 
-            address: {
-                type: String
             }
         })
     }

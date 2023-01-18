@@ -6,19 +6,11 @@ import authMiddleware from "../../middlewares/auth/auth.middleware.js";
 import ordersController from "../../controllers/Orders.controller.js"
 const ordersControllerMethods = new ordersController()
 
-// router.get("/", authMiddleware, async (req,res)=>{
-//   try {
-//     res.render("cart", { layouts: "index", session: req.session });
-//   } catch (error) {
-//     res.send(error);
-//   }
-// })
-
 router.post("/", ordersControllerMethods.createOrder);
 
-router.get("/:id", ordersControllerMethods.getCartById);
+router.get("/:id", ordersControllerMethods.getOrderById);
 
-router.get("/", ordersControllerMethods.getCartByBuyer);
+router.get("/", ordersControllerMethods.getOrderByBuyer);
 
 router.delete("/:id", ordersControllerMethods.deleteOrderById);
 

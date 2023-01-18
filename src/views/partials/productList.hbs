@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <tr class="table-dark">
-    {{!-- <th scope="col" class="text-center align-middle">Id</th> --}}
     <th scope="col" class="text-center align-middle"></th>
     <th scope="col" class="text-center align-middle">Nombre</th>
     <th scope="col" class="text-center align-middle">Precio</th>
@@ -15,16 +14,16 @@
     </tr>
   </thead>
   <tbody id="listadoProductos">
-    <form action="/api/cart/{{cart.id}}/productos" method="POST">
+    <input type="text"  style="display: none;" value={{cartId}} id="cart">
       {{#each products}}
-        {{#each this}}
-          {{#if this}}
-            {{#if this.titulo}}
+        {{#if this}}
+          {{#each this}}
+            {{#if titulo}}
               <tr class="text-center align-middle">
                   {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
                   <td class="text-center align-middle">
                     <input name="product" value={{_id}} style="display: none;"/>
-                      <button type="submit" class="btn btn-primary btn-sm">
+                      <button type="button" onclick="addToCart(this)" id={{_id}} class="btn btn-primary btn-sm">
                         Agregar al carrito
                       </button>
                   </td>
@@ -33,10 +32,9 @@
                   <td class="text-center align-middle"><img src="{{miniatura}}" alt="{{titulo}}" style="width:3rem"></td>
               </tr>
             {{/if}}
-          {{/if}}
-        {{/each}}
+          {{/each}}
+        {{/if}}
       {{/each}}
-    </form>
   </tbody>
 </table>
 </div>

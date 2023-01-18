@@ -6,14 +6,6 @@ import authMiddleware from "../../middlewares/auth/auth.middleware.js";
 import cartsController from "../../controllers/Carts.controller.js"
 const cartsControllerMethods = new cartsController()
 
-router.get("/", authMiddleware, async (req,res)=>{
-  try {
-    res.render("cart", { layouts: "index", session: req.session });
-  } catch (error) {
-    res.send(error);
-  }
-})
-
 router.post("/", cartsControllerMethods.createCart);
 
 router.delete("/:id", cartsControllerMethods.deleteCartById);

@@ -1,80 +1,56 @@
+import cartApiContainer from "../api/Carts.api.js"
 import ordersApiContainer from "../api/Orders.api.js"
 
-const API = new ordersApiContainer()
-
+const ordersAPI = new ordersApiContainer()
+const cartsApi = new cartApiContainer()
 class ordersController {
  
     createOrder = async (req, res) => {
         try {
-            const orderId = await API.createOrder(req.session.username)
-            res.json({
-                id: orderId,
-            });
-        } catch {
-            res.json({
+            const cart = await cartsApi.getById(req.body.cartId)
+            const orderId = await ordersAPI.createOrder(req.session.username, cart)
+            await cartsApi.deleteCart(req.body.cartId)
+        } catch (error) {
+            res.status(500).json({
                 msg: "No se pudo crear la orden"
             })
         }
     }
     
-    getCartById = async (req, res) => {
+    getOrderById = async (req, res) => {
         try {
-            const order = await API.getById(req.params.id);
+            const order = await ordersAPI.getById(req.params.id);
             res.json({
                 data: order,
             })
-        } catch {
+        } catch (error){
             res.json({
                 error: `Orden no encontrada`,
             });
         }
     }
 
-    getCartByBuyer = async (req, res) => {
+    getOrderByBuyer = async (req, res) => {
         try {
-            console.log(req.session)
             const data= []
-            // const order = await API.getByBuyer(req.session.user);
+            // const order = await ordersAPI.getByBuyer(req.session.user);
             res.json({
                 data: order,
             })
-        } catch {
+        } catch (error){
             res.json({
                 error: `Orden no encontrada`,
             });
         }
-    }
-    
-    // addProductsToCart = async (req, res) => {
-    //     try {
-    //         const response = await API.addProduct(req.params.id, req.body.product, req.session.username)
-    //         res.json({ data: response });
-    //     } catch {
-    //         res.json({
-    //             error: `Error al agregar producto`,
-    //         })
-    //     }
-    // }
-    
-    // deleteProductFromCart = async (req, res) => {
-    //     try {
-    //         const response = await API.deleteProduct(req.params.id, req.params.id_prod)
-    //         res.json({ data: response });
-    //     } catch {
-    //       res.json({
-    //         msg: "Error al eliminar producto",
-    //       });
-    //     }
-    //   };
-    
+    }  
     
     deleteOrderById = async (req, res) => {
         try {
-            await API.deleteOrder(req.params.id);
+            await ordersAPI.deleteOrder(req.params.id);
             res.json({
                 msg: `Orden Eliminada`,
             });
-        } catch {
+        } catch (error){
             res.json({
                 error: `Orden no encontrada`,
             });

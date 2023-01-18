@@ -29,6 +29,9 @@ constructor(){
         code: {
             type: String,
             required: true
+        },
+        category: {
+            type: String,
         }
     })
 }}

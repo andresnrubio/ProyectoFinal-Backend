@@ -1,14 +1,16 @@
 const { ordersDao: ordersContainer } = await import('../model/index.js')
-
+import {addQuantity} from "../utils/utils.js"
 class orderApiContainer {
  
-createOrder = async (buyerEmail, products) =>{
+createOrder = async (products) =>{
     try {
         let newOrder = await ordersContainer.newOrder()
-        newOrder.buyer = buyerEmail
-        newOrder.items = []
+        newOrder.buyer = products.user
+        newOrder.items = addQuantity(products.products)
+        newOrder.address = "Av. siempre viva 123 - Springfield"
         const order = await ordersContainer.saveInFile(newOrder)
-        return order._id
+        //TODO enviar correo con orden generada
+        return order.orderNumber
     } catch (error) {
         throw new Error("Error al crear la orden");
     }
@@ -31,37 +33,6 @@ getByBuyer = async (buyer) => {
         throw new Error("Error al obtener orden");
     }
 }
-
-// addProduct = async (cartId, productId, username) => {
-//     try {
-//         if(cartId===' '){
-//             this.createCart(username)
-//         } else {
-//             let cart = await ordersContainer.getById(cartId);
-//             const productToAdd = await productsContainer.getById(productId)
-//             if (!productToAdd) {
-//                 return `No existe producto con ese ID`
-//             } else {
-//                 cart.products.push(productToAdd);
-//                 await ordersContainer.updateById(cartId, cart)
-//                 return cart
-//             }
-//         }
-//     } catch (error) {
-//         throw new Error("Error al agregar un producto");
-//     }
-// }
-
-// deleteProduct = async (cartId, productId) => {
-//     try {
-//         let cart = await ordersContainer.getById(cartId);
-//         cart.products = cart.products.filter((product) => product.id === productId);
-//         await ordersContainer.updateById(cartId, cart)
-//         return cart
-//     } catch (error) {
-//         throw new Error("Error al agregar un producto");
-//     }
-// }
 
 deleteOrder = async (cartId) => {
     try {

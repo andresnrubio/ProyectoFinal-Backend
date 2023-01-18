@@ -34,7 +34,7 @@ class ContainerMongoDb {
 
   async saveInFile(element) {
     try {
-      const data = this.collection.create(element)
+      const data = await this.collection.create(element)
       return data;
     }
     catch (error) {

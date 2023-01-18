@@ -4,8 +4,8 @@ class cartApiContainer {
  
 createCart = async (username) =>{
     try {
-        let newCart = await cartContainer.newCart()
-        newCart.username = username
+        let newCart = cartContainer.newCart()
+        newCart.user = username
         const carts = await cartContainer.saveInFile(newCart)
         return carts._id
     } catch (error) {
@@ -13,11 +13,12 @@ createCart = async (username) =>{
     }
 }
 
-checkUserCart = async (user) =>{
+checkUserCart = async (username) =>{
     try {
-        const cart = await this.getCartByUser(user)
+        const cart = await this.getCartByUser(username)
         if (!cart){
-            return false
+            const newCartId = await this.createCart(username)
+            return newCartId
         }
         return cart.id
     } catch (error) {
@@ -36,7 +37,7 @@ getById = async (id) => {
 
 getCartByUser = async (user) => {
     try {
-        let foundElement = await cartContainer.getCartByUser(user);
+        let foundElement = await cartContainer.findByBuyer(user);
             return foundElement;
     } catch (error) {
         throw new Error("Error al obtener id");
@@ -66,7 +67,7 @@ addProduct = async (cartId, productId, username) => {
 deleteProduct = async (cartId, productId) => {
     try {
         let cart = await cartContainer.getById(cartId);
-        cart.products = cart.products.filter((product) => product.id === productId);
+        cart.products = cart.products.filter((product) => product._id != productId);
         await cartContainer.updateById(cartId, cart)
         return cart
     } catch (error) {

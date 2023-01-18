@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/login", authMiddleware, async (req, res) => {
   console.log('redirect')
-  return res.status(200).redirect("/api/productos");
+  return res.status(200).redirect("/home");
 });
 
 
@@ -18,7 +18,7 @@ router.post("/login", passport.authenticate('login',
 ), (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;
-  res.status(200).redirect("/api/productos");
+  res.status(200).redirect("/home");
 });
 
 
@@ -45,7 +45,7 @@ router.get("/logout", authMiddleware, async (req, res) => {
         return res.status(500).send(`<h1>No se pudo cerrar sesion</h1>`);
       }
     });
-    return res.status(200).redirect("/api/productos");
+    return res.status(200).redirect("/home");
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -70,6 +70,6 @@ router.post("/uploadavatar", upload.single('avatar'), async (req, res, next) =>{
     return next(error)
   }
   await usersCollection.updateOne({username: `${req.session.username}`}, {avatar: file.filename })
-  res.status(200).redirect("/api/productos");
+  res.status(200).redirect("/home");
 })
 export default router;
