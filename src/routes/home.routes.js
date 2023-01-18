@@ -10,6 +10,8 @@ router.get("/home", authMiddleware, viewsControllerMethods.renderMain);
 
 router.get("/cart", authMiddleware, viewsControllerMethods.renderCart)
 
+router.get("/orders", authMiddleware, viewsControllerMethods.renderOrders)
+
 router.get("/chat", authMiddleware, viewsControllerMethods.renderChat)
   
 export default router;

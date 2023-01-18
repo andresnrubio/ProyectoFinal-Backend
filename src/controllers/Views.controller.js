@@ -29,6 +29,15 @@ renderCart = async (req,res)=>{
     }
 }
 
+renderOrders = async (req,res)=>{
+    try {
+        const orders = await ordersAPI.getByBuyer(req.session.username)
+        res.render("orders", { layouts: "index", session: req.session, orders});
+    } catch (error) {
+        res.send(error);
+    }
+}
+
 renderChat = (req, res) => {
     res.render("chatView", { layouts: "index", session: req.session});
 }

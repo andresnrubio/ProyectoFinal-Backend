@@ -8,7 +8,7 @@ class ordersController {
     createOrder = async (req, res) => {
         try {
             const cart = await cartsApi.getById(req.body.cartId)
-            const orderId = await ordersAPI.createOrder(req.session.username, cart)
+            const orderId = await ordersAPI.createOrder(cart)
             await cartsApi.deleteCart(req.body.cartId)
         } catch (error) {
             res.status(500).json({

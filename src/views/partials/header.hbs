@@ -38,13 +38,21 @@
                 Ver mas productos
               </button>
             </form>
-            {{else}}
+          {{/if}}
+          {{#if cartButton}}
             <form action="/cart" method="GET" style="margin: 0">
               <button type="submit" class="btn btn-primary btn-md">
                 Carrito
               </button>
             </form>
-          {{/if}}
+            {{/if}}
+            {{#if ordersButton}}
+            <form action="/orders" method="GET" style="margin: 0">
+                <button type="submit" class="btn btn-primary btn-md">
+                  Ordenes
+                </button>
+            </form>
+            {{/if}}
           <form action="/logout" method="GET" style="margin: 0">
             <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               Logout
