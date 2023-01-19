@@ -1,11 +1,18 @@
-import cartApiContainer from "../api/Carts.api.js";
+import cartApiContainer from "../api/carts.api.js";
 const API = new cartApiContainer()
 
 class cartsController {
  
 createCart = async (req, res) => {
     try {
-        const cartId = await API.createCart(req.session.username)
+        const email = () =>{
+            if (req.session.username){
+                return req.session.username
+            }else{
+                return req.body.email
+            }
+        }
+        const cartId = await API.createCart(email())
         res.json({
             id: cartId,
         });
@@ -32,7 +39,7 @@ getCartById = async (req, res) => {
 addProductsToCart = async (req, res) => {
     try {
         const response = await API.addProduct(req.params.id, req.body.id, req.session.username)
-        res.status(200)
+        res.status(200).json({response})
     } catch {
         res.json({
             error: `Error al agregar producto`,

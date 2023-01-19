@@ -1,6 +1,6 @@
-import ContainerFs from "../../containers/ContainerFs.js";
+import containerFs from "../../containers/containerFs.js";
 
-class cartsDaoFs extends ContainerFs {
+class cartsDaoFs extends containerFs {
     constructor(path, model) {
         super(path, model)
     }

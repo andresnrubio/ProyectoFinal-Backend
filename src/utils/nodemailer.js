@@ -24,14 +24,38 @@ html: `<div><h2>Se ha registrado un nuevo usuario</h2><h4>Nombre de Usuario: <sp
 console.log("Message sent: %s", info.messageId);
 }
 
-const stringCarrito = (cart) => {
+const stringCarrito = (order) => {
     // TODO funcion de enlistado de productos de carrito y conversion a html para correo
+let cartShow=""
+order.items.forEach((producto)=>{
+cartShow += `              
+<tr class="text-center align-middle">
+<td class="text-center align-middle">${producto.title}</td>
+<td class="text-center align-middle">$ ${producto.price}</td>
+<td class="text-center align-middle"><img src="${producto.thumbnail}" alt="{{title}}" style="width:3rem"></td>
+</tr>
+`
+})
 
-return "<h1>Carrito</h1>"
+return `
+<h3>Nueva Orden</h3>
+<p>${order.buyer} ingreso una nueva orden</p>
+<table class="table tablaProductos col-md-4 ">
+<thead>
+<tr>
+<tr class="table-dark">
+<th scope="col" class="text-center align-middle">Nombre</th>
+<th scope="col" class="text-center align-middle">Precio</th>
+<th scope="col" class="text-center align-middle" >Foto</th>
+</tr>
+</tr>
+</thead>${cartShow}</tbody>
+</table>
+<p>Direccion de entrega ${order.address}</p>`
 }
 
-async function avisoNuevoCarrito(user, cart) {
-
+async function avisoNuevaOrden(order) {
+console.log(order)
 let transporter = nodemailer.createTransport({
 service: "gmail",
 port: 587,
@@ -40,16 +64,15 @@ auth: {
     pass: process.env.NODEMAILER_PASS,
 },
 });
-
 let info = await transporter.sendMail({
 from: 'API notifications <NotificacionesAPI@backend.com>',
 to: process.env.NODEMAILER_ADMIN_EMAIL,
-subject: `Nuevo pedido de: ${user}`,
-text: "Nuevo pedido",
-html: stringCarrito,
+subject: `Nueva orden de: ${order.buyer}`,
+text: "Nuevo orden",
+html: stringCarrito(order),
 });
 
 console.log("Message sent: %s", info.messageId);
 }
 
-export { avisoNuevoUsuario, avisoNuevoCarrito };
+export { avisoNuevoUsuario, avisoNuevaOrden };

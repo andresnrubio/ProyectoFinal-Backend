@@ -1,5 +1,5 @@
 import cartsDaoFs from "./cartsDaoFs.js"
-import CartsDaoMongoDb from "./CartsDaoMongoDb.js"
+import cartsDaoMongoDb from "./cartsDaoMongoDb.js"
 
 class cartsFactoryDAO {
     static get(type) {
@@ -7,7 +7,7 @@ class cartsFactoryDAO {
             case 'fs':
                 return new cartsDaoFs("./src/DB/fs/carts.txt", [])
             case 'mongo':
-                return new CartsDaoMongoDb()
+                return new cartsDaoMongoDb()
             default:
                 return new cartsDaoFs()
         }

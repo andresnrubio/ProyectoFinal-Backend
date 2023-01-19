@@ -1,30 +1,32 @@
-import ContainerMongoDb from '../../containers/ContainerMongoDb.js';
+import containerMongoDb from '../../containers/containerMongoDb.js';
+import mongoose from 'mongoose'
 
-class OrdersDaoMongoDb extends ContainerMongoDb {
+class ordersDaoMongoDb extends containerMongoDb {
 constructor(){
-    super('orders',
-    {
-        buyer: {
-        type: String,
-        required: true,
-        },
-        status: {
+    let modelSchema = new mongoose.Schema({
+            buyer: {
             type: String,
             required: true,
-        },
-        items: {
-            type: Array,
-            required: true
-        },
-        orderNumber: {
-            type: Number,
-            required: true
-        },
-        address: {
-            type: String,
-            required: true
-        }
-    })}
+            },
+            status: {
+                type: String,
+                required: true,
+            },
+            items: {
+                type: Array,
+                required: true
+            },
+            orderNumber: {
+                type: Number,
+                required: true
+            },
+            address: {
+                type: String,
+                required: true
+            }},
+            { timestamps: true })
+    super('orders',modelSchema
+    )}
 
     async newOrder(){
         const orders = await this.getAllFile()
@@ -42,5 +44,4 @@ constructor(){
     }
 }
 
-export default OrdersDaoMongoDb;
-
+export default ordersDaoMongoDb;

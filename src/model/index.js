@@ -12,3 +12,4 @@ let ordersDao = OrdersFactoryDAO.get(process.env.DB_SERVICE)
 let messagesDao = messagesFactoryDAO.get(process.env.DB_SERVICE)
 
 export { productsDao, cartsDao, ordersDao, messagesDao }
+

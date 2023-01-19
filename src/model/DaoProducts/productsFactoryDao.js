@@ -1,5 +1,5 @@
 import productsDaoFs from "./productsDaoFs.js"
-import ProductsDaoMongoDb from "./ProductsDaoMongoDb.js"
+import productsDaoMongoDb from "./productsDaoMongoDb.js"
 
 class productsFactoryDAO {
     static get(type) {
@@ -7,7 +7,7 @@ class productsFactoryDAO {
             case 'fs':
                 return new productsDaoFs("./src/DB/fs/products.txt", [])
             case 'mongo':
-                return new ProductsDaoMongoDb()
+                return new productsDaoMongoDb()
             default:
                 return new productsDaoFs()
         }
@@ -15,3 +15,4 @@ class productsFactoryDAO {
 }   
 
 export default productsFactoryDAO
+

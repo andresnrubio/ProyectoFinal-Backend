@@ -5,7 +5,7 @@ class cartApiContainer {
 createCart = async (username) =>{
     try {
         let newCart = cartContainer.newCart()
-        newCart.user = username
+        newCart.email = username
         const carts = await cartContainer.saveInFile(newCart)
         return carts._id
     } catch (error) {

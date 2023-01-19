@@ -1,9 +1,9 @@
-import ContainerMongoDb from '../../containers/ContainerMongoDb.js';
+import containerMongoDb from '../../containers/containerMongoDb.js';
+import mongoose from 'mongoose'
 
-class MessagesDaoMongoDb extends ContainerMongoDb {
+class messagesDaoMongoDb extends containerMongoDb {
 constructor(){
-    super('messages',
-    {
+    let modelSchema = new mongoose.Schema({
         email: {
         type: String,
         required: true,
@@ -15,8 +15,10 @@ constructor(){
         messages: {
             type: Array,
             required: true
-        }
-    })}
+        }},
+        { timestamps: true })
+    super('messages',modelSchema)
+}
 
     async findByUser(user){
         try {
@@ -29,5 +31,5 @@ constructor(){
     }
 }
 
-export default MessagesDaoMongoDb;
+export default messagesDaoMongoDb;
 

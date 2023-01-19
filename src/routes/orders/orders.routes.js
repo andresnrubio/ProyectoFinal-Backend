@@ -10,8 +10,7 @@ router.post("/", ordersControllerMethods.createOrder);
 
 router.get("/:id", ordersControllerMethods.getOrderById);
 
-router.get("/", ordersControllerMethods.getOrderByBuyer);
-
 router.delete("/:id", ordersControllerMethods.deleteOrderById);
 
 export default router;
+

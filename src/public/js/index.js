@@ -24,9 +24,8 @@ btnEnviar.addEventListener("click", (event) => {
 });
 
 socket.on("chat", (dataMessages) => {
-
   let chat = "";
-  dataMessages[1].messages.forEach((mensaje) => {
+  dataMessages[0].messages.forEach((mensaje) => {
     chat += `<li><p>
     <span class="fw-bold" style="color: blue">${mensaje.author.email}:</span>
     <span style="color: green" class="fst-italic">${mensaje.text}</span> 
@@ -34,6 +33,7 @@ socket.on("chat", (dataMessages) => {
     </li>
     `;
   });
+  
   document.getElementById("mensajes").innerHTML = chat;
   // document.getElementById("compresion").innerHTML = `Compresion: ${lengthReduction.toFixed(2)}%`
 });
@@ -56,6 +56,7 @@ const addToCart = ($this) =>{
 }
 
 const deleteFromCart = ($this) =>{
+  console.log($this)
   const {value: cartId} = document.getElementById("cart")
   const id = $this.id
   fetch(`/api/cart/${cartId}/productos/${id}`, {

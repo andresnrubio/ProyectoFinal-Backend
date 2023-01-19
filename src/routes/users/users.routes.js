@@ -1,19 +1,26 @@
 import express from "express";
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
+import { generateToken } from "../../middlewares/jwt/jwt.middleware.js";
 import upload from "../../utils/multer.js";
 const { Router } = express;
 import { passport, usersCollection } from '../../middlewares/passport/passport.middleware.js';
 import { avisoNuevoUsuario } from "../../utils/nodemailer.js";
 const router = Router();
 
-
 router.get("/login", authMiddleware, async (req, res) => {
   console.log('redirect')
   return res.status(200).redirect("/home");
 });
 
-
 router.post("/login", passport.authenticate('login', 
+{failureRedirect: '/autherror'}
+), (req, res) => {
+  req.session.username = req.body.username;
+  req.session.admin = true;
+  res.json({token: generateToken({user:req.body.username})})
+});
+
+router.post("/loginForm", passport.authenticate('login', 
 {failureRedirect: '/autherror'}
 ), (req, res) => {
   req.session.username = req.body.username;
@@ -21,11 +28,9 @@ router.post("/login", passport.authenticate('login',
   res.status(200).redirect("/home");
 });
 
-
 router.get("/signup", async (req, res) => {
   res.render("signup", { layouts: "index" });
 });
-
 
 router.post("/signup", passport.authenticate('signup', {
   failureRedirect: '/signuperror'
@@ -33,8 +38,8 @@ router.post("/signup", passport.authenticate('signup', {
   req.session.username = req.body.username;
   req.session.admin = true;
   avisoNuevoUsuario(req.body)
-  res.render("avatarUpload", { layouts: "index" });
-  // res.status(200).redirect("/api/productos");
+  // res.render("avatarUpload", { layouts: "index" });
+  res.status(200).redirect("/api/productos");
 })
 
 
@@ -45,7 +50,7 @@ router.get("/logout", authMiddleware, async (req, res) => {
         return res.status(500).send(`<h1>No se pudo cerrar sesion</h1>`);
       }
     });
-    return res.status(200).redirect("/home");
+    res.status(200).redirect("/home");
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -73,3 +78,4 @@ router.post("/uploadavatar", upload.single('avatar'), async (req, res, next) =>{
   res.status(200).redirect("/home");
 })
 export default router;
+

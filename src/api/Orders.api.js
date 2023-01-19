@@ -5,12 +5,12 @@ class orderApiContainer {
 createOrder = async (products) =>{
     try {
         let newOrder = await ordersContainer.newOrder()
-        newOrder.buyer = products.user
+        newOrder.buyer = products.email
         newOrder.items = addQuantity(products.products)
         newOrder.address = "Av. siempre viva 123 - Springfield"
         const order = await ordersContainer.saveInFile(newOrder)
         //TODO enviar correo con orden generada
-        return order.orderNumber
+        return order
     } catch (error) {
         throw new Error("Error al crear la orden");
     }

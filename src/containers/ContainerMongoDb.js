@@ -1,14 +1,10 @@
 //* Conection to MongoDb */
 import connectDB from '../DB/mongoDB/connection.js'
 connectDB()
-
 import mongoose from 'mongoose'
 
-class ContainerMongoDb {
-  constructor(name, schema) {
-    let modelSchema = new mongoose.Schema(schema,
-      { timestamps: true }
-    )
+class containerMongoDb {
+  constructor(name, modelSchema) {
     this.collection = mongoose.model(name, modelSchema)
   }
 
@@ -65,4 +61,4 @@ class ContainerMongoDb {
   
 }
 
-export default ContainerMongoDb;
+export default containerMongoDb;

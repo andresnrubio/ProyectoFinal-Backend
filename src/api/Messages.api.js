@@ -7,13 +7,14 @@ class messagesApiContainer {
             let messages = await messagesContainer.getAllFile();
             return messages
         } catch (error) {
-            res.send(error);
+            throw new Error("Error al obtener mensajes")
         }
     }
     
     saveMessage = async (message) => {
         try{
             const conversation = await messagesContainer.findByUser(message.author.email)
+
             if(conversation.length === 0){
             const newConversation = {email: message.author.email, type: defineType(message.author.email), messages: [message]}
             const newMessage = await messagesContainer.saveInFile(newConversation)

@@ -1,17 +1,19 @@
-import ContainerMongoDb from '../../containers/ContainerMongoDb.js';
+import containerMongoDb from '../../containers/containerMongoDb.js';
+import mongoose from 'mongoose'
 
-class CartsDaoMongoDb extends ContainerMongoDb {
+class cartsDaoMongoDb extends containerMongoDb {
     constructor() {
-        super('carts', {
+        let modelSchema = new mongoose.Schema({
             products: {
                 type: Array,
                 max: 100,
             },
-            user: {
+            email: {
                 type: String,
                 required: true,
-            }
-        })
+            }},
+        { timestamps: true })
+        super('carts', modelSchema)
     }
 
     newCart() {
@@ -52,4 +54,4 @@ class CartsDaoMongoDb extends ContainerMongoDb {
 
 }
 
-export default CartsDaoMongoDb;
+export default cartsDaoMongoDb;

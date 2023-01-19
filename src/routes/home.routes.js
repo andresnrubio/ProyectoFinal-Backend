@@ -14,4 +14,7 @@ router.get("/orders", authMiddleware, viewsControllerMethods.renderOrders)
 
 router.get("/chat", authMiddleware, viewsControllerMethods.renderChat)
   
+router.get("/info", viewsControllerMethods.renderInfo)
+
 export default router;
+

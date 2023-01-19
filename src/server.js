@@ -14,7 +14,6 @@ const PORT = process.env.PORT;
 const { Server: HttpServer } = await import("http");
 const httpServer = new HttpServer(app);
 const { Server: SocketServer } = await import("socket.io");
-const {normalizeData: normalize} = await import("./normalizr/normalizr.js");
 import messagesApiContainer from './api/Messages.api.js'
 const messagesApi = new messagesApiContainer()
 const initSocket =()=>{
@@ -27,8 +26,6 @@ const io = new SocketServer(httpServer);
     socket.on("nuevoMensaje", async (data) => {
       await messagesApi.saveMessage(data);
       let dataMessages = await messagesApi.getAllFile();
-      console.log(dataMessages)
-      // dataMessages = await normalize.dataNormalizer(dataMessages);
       io.sockets.emit("chat", dataMessages);
     });
   });
@@ -105,6 +102,3 @@ httpServer.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
 
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port: ${PORT}`);
-// });

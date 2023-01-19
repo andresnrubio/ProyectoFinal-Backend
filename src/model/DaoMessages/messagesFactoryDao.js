@@ -1,14 +1,14 @@
-import MessagesDaoMongoDb from "./MessagesDaoMongoDb.js"
+import messagesDaoMongoDb from "./messagesDaoMongoDb.js"
 
 class messagesFactoryDAO {
     static get(type) {
         switch (type) {
             case 'fs':
-                return new productsDaoFs("./src/DB/fs/products.txt", [])
+                return new messagesDaoFs("./src/DB/fs/products.txt", [])
             case 'mongo':
-                return new MessagesDaoMongoDb()
+                return new messagesDaoMongoDb()
             default:
-                return new productsDaoFs()
+                return new messagesDaoFs()
         }
     }
 }   

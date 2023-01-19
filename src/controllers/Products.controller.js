@@ -1,18 +1,11 @@
-import productsApiContainer from "../api/Products.api.js"
+import productsApiContainer from "../api/products.api.js"
 
 const API = new productsApiContainer()
 class productsController {
 
-renderMain = async (req, res) => {
-    try {
-        let products = await API.getAllFile();  
-        res.render("main", { products, session: req.session })
-    } catch (error) {
-        res.send(error);
-    }
-}
 
 getAll = async (req, res) => {
+  console.log("hola")
     try {
         let products = await API.getAllFile();
         res.json({
@@ -34,9 +27,8 @@ getById = async (req, res) => {
 
 saveProduct = async (req, res) => {
     try {
-      await API.saveProduct(req.body);
-      // res.render("main", { layouts: "index" });
-      // res.render("layouts/index", { listProducts: false });
+      const data = await API.saveProduct(req.body);
+      res.status(200).json(data)
     } catch (error) {
       res.send(error);
     }

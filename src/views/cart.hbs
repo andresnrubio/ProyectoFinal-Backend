@@ -18,7 +18,7 @@
                         <input type="text"  style="display: none;" value={{cartId}} id="cart">
                         {{#each cartsProducts}}
                             {{#if this}}
-                                {{#if titulo}}
+                                {{#if title}}
                                     <tr class="text-center align-middle">
                                         {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
                                         <td class="text-center align-middle">
@@ -30,9 +30,9 @@
                                         </form>
                                         </td>
                                         <td class="text-center align-middle">{{quantity}}</td>
-                                        <td class="text-center align-middle">{{titulo}}</td>
-                                        <td class="text-center align-middle">$ {{precio}}</td>
-                                        <td class="text-center align-middle"><img src="{{miniatura}}" alt="{{titulo}}" style="width:3rem"></td>
+                                        <td class="text-center align-middle">{{title}}</td>
+                                        <td class="text-center align-middle">$ {{price}}</td>
+                                        <td class="text-center align-middle"><img src="{{thumbnail}}" alt="{{title}}" style="width:3rem"></td>
                                     </tr>
                                 {{/if}}
                             {{/if}}

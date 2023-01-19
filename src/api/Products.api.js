@@ -7,7 +7,7 @@ getAllFile = async () => {
         let products = await fileContainer.getAllFile();
         return products
     } catch (error) {
-        res.send(error);
+      throw new Error("error al obtener productos")
     }
 }
 

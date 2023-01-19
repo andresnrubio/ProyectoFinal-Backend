@@ -1,9 +1,8 @@
-import ContainerMongoDb from '../../containers/ContainerMongoDb.js';
-
-class ProductsDaoMongoDb extends ContainerMongoDb {
-constructor(){
-    super('products',
-    {
+import containerMongoDb from '../../containers/containerMongoDb.js';
+import mongoose from 'mongoose'
+class productsDaoMongoDb extends containerMongoDb {
+    constructor(){
+    let modelSchema = new mongoose.Schema({
         title:{
         type: String,
         required: true,
@@ -33,7 +32,9 @@ constructor(){
         category: {
             type: String,
         }
-    })
+    },
+    { timestamps: true })
+    super('products', modelSchema )
 }}
 
-export default ProductsDaoMongoDb;
+export default productsDaoMongoDb;
