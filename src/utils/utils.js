@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 
-
 const isValidePassword = (user, password) => {
     return bcrypt.compareSync(password, user.password )
 }
@@ -21,4 +20,12 @@ const addQuantity = (products) => {
     }, []);
   }
 
-export {isValidePassword, createHash, addQuantity};
+  const defineType = (user) =>{
+    if (user === 'admin') {
+      return 'sistema'
+    }else{
+      return 'usuario'
+    }
+  }
+
+export {isValidePassword, createHash, addQuantity, defineType};

@@ -1,6 +1,5 @@
 import multer from "multer"
 
-
 let storage = multer.diskStorage({
     destination: (req, _file, cb) => {
       cb(null,'src/public/img/')

@@ -10,43 +10,31 @@ const chatSchema = new normalizr.schema.Entity("chat", {
   mensajes: [mensajeSchema]
 })
 
-// const btnEnviar = document.getElementById("btnEnviar");
+const btnEnviar = document.getElementById("btnEnviar");
 
-// btnEnviar.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   let email = document.getElementById("email").value;
-//   let userName = document.getElementById("userName").value;
-//   let userSurname = document.getElementById("userSurname").value;
-//   let userAge = document.getElementById("userAge").value;
-//   let userNickname = document.getElementById("userNickname").value;
-//   let avatar = document.getElementById("avatar").value;
-//   let text = document.getElementById("text").value;
+btnEnviar.addEventListener("click", (event) => {
+  event.preventDefault();
+  let email = document.getElementById("email").value;
+  // let avatar = document.getElementById("avatar").value;
+  let text = document.getElementById("text").value;
   
-//   if (email && text && userAge && userName && userNickname && avatar && userSurname) {
-//     socket.emit("nuevoMensaje", { author: { email, userName, userSurname, userAge, userNickname, avatar }, text});
-//   }
-// });
+  if (email && text) {
+    socket.emit("nuevoMensaje", { author: { email }, text});
+  }
+});
 
-socket.on("chat", (mensajesNormalized) => {
+socket.on("chat", (dataMessages) => {
 
-  // const denormalizedData = normalizr.denormalize(mensajesNormalized.result, chatSchema, mensajesNormalized.entities)
-
-  // const originalLength = JSON.stringify(denormalizedData).length;
-  // const normalizedLength= JSON.stringify(mensajesNormalized).length;
-  // const lengthReduction = ((originalLength-normalizedLength) /  originalLength) * 100
-  
-  // const mensajes = denormalizedData.mensajes
-  const mensajes = []
   let chat = "";
-  mensajes.forEach((mensaje) => {
+  dataMessages[1].messages.forEach((mensaje) => {
     chat += `<li><p>
-    <span class="fw-bold" style="color: blue">${mensaje.author.userNickname}:</span>
+    <span class="fw-bold" style="color: blue">${mensaje.author.email}:</span>
     <span style="color: green" class="fst-italic">${mensaje.text}</span> 
     </p>
     </li>
     `;
   });
-  // document.getElementById("mensajes").innerHTML = chat;
+  document.getElementById("mensajes").innerHTML = chat;
   // document.getElementById("compresion").innerHTML = `Compresion: ${lengthReduction.toFixed(2)}%`
 });
 
@@ -55,7 +43,7 @@ const addToCart = ($this) =>{
   const id = $this.id
   const data = JSON.stringify({id: id})
   fetch(`/api/cart/${cartId}/productos`, {
-  method: 'POST', // or 'PUT'
+  method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -71,7 +59,7 @@ const deleteFromCart = ($this) =>{
   const {value: cartId} = document.getElementById("cart")
   const id = $this.id
   fetch(`/api/cart/${cartId}/productos/${id}`, {
-  method: 'DELETE', // or 'PUT'
+  method: 'DELETE',
   headers: {
     'Content-Type': 'application/json',
   }

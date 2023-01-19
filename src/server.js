@@ -14,23 +14,22 @@ const PORT = process.env.PORT;
 const { Server: HttpServer } = await import("http");
 const httpServer = new HttpServer(app);
 const { Server: SocketServer } = await import("socket.io");
-// const normalize = require("../normalizr/normalizr.js");
-// const messagesApi = require("../api/messages.api.js")
-
+const {normalizeData: normalize} = await import("./normalizr/normalizr.js");
+import messagesApiContainer from './api/Messages.api.js'
+const messagesApi = new messagesApiContainer()
 const initSocket =()=>{
 const io = new SocketServer(httpServer);
 
   io.on("connection", async (socket) => {
-    // let mensajes = await messagesApi.getAllFile();
-    // let data = await messagesApi.readFile();
-    // data = await normalize.dataNormalizer(data);
-    socket.emit("chat", {});
+    let dataMessages = await messagesApi.getAllFile();
+    socket.emit("chat", dataMessages);
 
     socket.on("nuevoMensaje", async (data) => {
-      // await messagesApi.saveInFile(data);
-      // let dataMessages = await messagesApi.readFile();
+      await messagesApi.saveMessage(data);
+      let dataMessages = await messagesApi.getAllFile();
+      console.log(dataMessages)
       // dataMessages = await normalize.dataNormalizer(dataMessages);
-      io.sockets.emit("chat", {});
+      io.sockets.emit("chat", dataMessages);
     });
   });
 }
