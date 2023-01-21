@@ -3,10 +3,11 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const generateToken = username => {
-    return jwt.sign(username, process.env.JWT_SECRET,{ expiresIn: '30m' })
+    return jwt.sign(username, process.env.JWT_SECRET,{ expiresIn: '10m' })
 }
 const validateToken = async (req, res, next) =>{
 let accessToken = req.headers['x-access-token'] || req.headers['authorization'];
+console.log(accessToken)
 accessToken = accessToken.replace(/^Bearer\s+/, "");
 if(!accessToken){ res.send('Acceso denegado')}
 

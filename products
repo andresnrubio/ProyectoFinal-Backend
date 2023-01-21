@@ -1,0 +1,101 @@
+[
+        {
+            "code": "6318ee479c965dadfa82e538",
+            "title": "Tijera",
+            "price": 250,
+            "thumbnail": "https://cdn2.iconfinder.com/data/icons/flat-icons-19/512/Sclssors.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Escolares"
+        },
+        {
+            "code": "6318f0339c965dadfa82e53a",
+            "title": "Box files",
+            "price": 1800,
+            "thumbnail": "https://cdn3.iconfinder.com/data/icons/business-258/64/_Box_Files-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Oficina"
+        },
+        {
+            "code": "6318f03e9c965dadfa82e53b",
+            "title": "Glue",
+            "price": 110,
+            "thumbnail": "https://cdn1.iconfinder.com/data/icons/office-208/24/Office_glue_liquid_tube_stick-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Escolares"
+        },
+        {
+            "code": "6318f0459c965dadfa82e53c",
+            "title": "Stapler",
+            "price": 450,
+            "thumbnail": "https://cdn1.iconfinder.com/data/icons/office-work-3/200/office_tools_03-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Oficina"
+        },
+        {
+            "code": "6318f04c9c965dadfa82e53d",
+            "title": "Eraser",
+            "price": 100,
+            "thumbnail": "https://cdn2.iconfinder.com/data/icons/education-and-school-7/64/education-138-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Escolares"
+        },
+        {
+            "code": "6318f0549c965dadfa82e53e",
+            "title": "Quill",
+            "price": 750,
+            "thumbnail": "https://cdn4.iconfinder.com/data/icons/office-319/64/office_tools_write_quill_ink_sign-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Escolares"
+        },
+        {
+            "code": "6318f05e9c965dadfa82e53f",
+            "title": "Desk lamp",
+            "price": 2500,
+            "thumbnail": "https://cdn0.iconfinder.com/data/icons/office-icons-14/200/vector_398_14-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Oficina"
+        },
+        {
+            "code": "6318f0669c965dadfa82e540",
+            "title": "Pencil",
+            "price": 100,
+            "thumbnail": "https://cdn4.iconfinder.com/data/icons/office-319/64/office_tools_pencil_tool_write-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Escolares"
+        },
+        {
+            "code": "6318f06e9c965dadfa82e541",
+            "title": "Cutter",
+            "price": 150,
+            "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-flat-sticker-vol-4/150/paper__cutter__knife__office__supplies__cutting__papercutter-1024.png",
+            "stock": 100,
+            "description": "descripcion del producto",
+            "category": "Oficina"
+        },
+        {
+            "code": "6318f0769c965dadfa82e542",
+            "title": "Tape",
+            "price": 350,
+            "thumbnail": "https://cdn3.iconfinder.com/data/icons/stationery-32/48/scotch_tape-1024.png",
+            "stock": 1,
+            "description": "descripcion del producto",
+            "category": "Oficina"
+        },
+        {
+            "code": "63190f63011b7311ceec6de5",
+            "title": "computer",
+            "price": 5000,
+            "thumbnail": "https://cdn3.iconfinder.com/data/icons/technology-13/48/tech-color_laptop-1024.png",
+            "stock": 0,
+            "description": "descripcion del producto",
+            "category": "Oficina"
+        }
+    ]

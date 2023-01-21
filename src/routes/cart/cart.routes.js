@@ -3,7 +3,7 @@ const { Router } = express;
 const router = Router();
 
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
-import cartsController from "../../controllers/Carts.controller.js"
+import cartsController from "../../controllers/carts.controller.js"
 const cartsControllerMethods = new cartsController()
 
 router.post("/", cartsControllerMethods.createCart);
