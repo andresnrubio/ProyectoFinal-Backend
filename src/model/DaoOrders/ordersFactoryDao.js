@@ -8,7 +8,7 @@ class ordersFactoryDAO {
             case 'mongo':
                 return new ordersDaoMongoDb()
             default:
-                return new ordersDaoMongofs()
+                return new ordersDaoMongoDb()
         }
     }
 }   

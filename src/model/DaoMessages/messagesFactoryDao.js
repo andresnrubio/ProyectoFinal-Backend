@@ -8,7 +8,7 @@ class messagesFactoryDAO {
             case 'mongo':
                 return new messagesDaoMongoDb()
             default:
-                return new messagesDaoFs()
+                return new messagesDaoMongoDb()
         }
     }
 }   
