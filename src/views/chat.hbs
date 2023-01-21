@@ -1,0 +1,10 @@
+{{#if session}}
+        {{>header}}
+    <div class="container w-100 d-flex flex-column justify-content-center">
+        {{>chat}}
+    </div>
+{{else}}
+    {{>login}}
+{{/if}}
+
+

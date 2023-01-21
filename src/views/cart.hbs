@@ -1,0 +1,52 @@
+{{#if session}}
+        {{>header productsButton='true' ordersButton='true'}}
+    <div class="container w-100 d-flex flex-column justify-content-center">   
+        <div class="w-100 d-flex align-items-center justify-content-center">
+            <div class="w-75 d-flex flex-column align-items-center justify-content-center">
+                <h1>Carrito</h1>
+                <table class="table tablaProductos col-md-4 ">
+                    <thead>
+                        <tr class="table-dark">
+                        <th scope="col" class="text-center align-middle"></th>
+                        <th scope="col" class="text-center align-middle">Cantidad</th>
+                        <th scope="col" class="text-center align-middle">Nombre</th>
+                        <th scope="col" class="text-center align-middle">Precio</th>
+                        <th scope="col" class="text-center align-middle">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listadoProductosCarrito">
+                        <input type="text"  style="display: none;" value={{cartId}} id="cart">
+                        {{#each cartsProducts}}
+                            {{#if this}}
+                                {{#if title}}
+                                    <tr class="text-center align-middle">
+                                        {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
+                                        <td class="text-center align-middle">
+                                        <form onsubmit="deleteFromCart(this)" id={{_id}}>
+                                        <input name="product" value={{this}} style="display: none;"/>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                            Eliminar del carrito
+                                            </button>
+                                        </form>
+                                        </td>
+                                        <td class="text-center align-middle">{{quantity}}</td>
+                                        <td class="text-center align-middle">{{title}}</td>
+                                        <td class="text-center align-middle">$ {{price}}</td>
+                                        <td class="text-center align-middle"><img src="{{thumbnail}}" alt="{{title}}" style="width:3rem"></td>
+                                    </tr>
+                                {{/if}}
+                            {{/if}}
+                        {{/each}}
+                    </tbody>
+                </table>
+                <form style="margin: 0" action="/api/orders/" method="post">
+                    <input type="text" style="display: none;" value={{cartId}} name="cartId" id="cartId">
+                    <button type="submit" class="btn btn-primary btn-md">
+                        Finalizar compra
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{{/if}}
+

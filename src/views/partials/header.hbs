@@ -1,0 +1,67 @@
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cierre de sesion exitoso</h5>
+      </div>
+      <div class="modal-body">
+      <h2>Hasta luego {{session.username}}!</h2>      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="w-100 d-flex justify-content-center"
+  style="height: 70px"
+>
+  <div
+    id="header"
+    style="background-color: rgb(193 180 255); height: 50px; margin-bottom: 2rem"
+      class="w-100"
+  >
+    <nav class="navbar navbar-expand-lg d-flex flex-row h-100">
+      <div class="container-fluid h-100" style="align-content: center;">
+        <a class="navbar-brand" href="/home">Eccomerce CoderHouse</a>
+          <form class="d-flex" role="search" style="margin: 0">
+            <input class="me-2" type="search" placeholder="Ingrese Producto" aria-label="Search">
+            {{!-- <button class="btn btn-outline-success" type="submit">Buscar productos</button> --}}
+          </form>
+            <form action="/chat" method="GET" style="margin: 0">
+              <button type="submit" class="btn btn-primary btn-md">
+                Chat
+              </button>
+            </form>
+          {{#if productsButton}}
+            <form action="/home" method="GET" style="margin: 0">
+              <button type="submit" class="btn btn-primary btn-md">
+                Ver mas productos
+              </button>
+            </form>
+          {{/if}}
+          {{#if cartButton}}
+            <form action="/cart" method="GET" style="margin: 0">
+              <button type="submit" class="btn btn-primary btn-md">
+                Carrito
+              </button>
+            </form>
+            {{/if}}
+            {{#if ordersButton}}
+            <form action="/orders" method="GET" style="margin: 0">
+                <button type="submit" class="btn btn-primary btn-md">
+                  Ordenes
+                </button>
+            </form>
+            {{/if}}
+          <form action="/logout" method="GET" style="margin: 0">
+            <button type="submit" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Logout
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+

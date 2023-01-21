@@ -1,0 +1,41 @@
+
+<div class="w-100 d-flex align-items-center justify-content-center">
+  <div class="w-75 d-flex flex-column align-items-center justify-content-center">
+    <h1>Estos son los productos disponibles</h1>
+<table class="table tablaProductos col-md-4 ">
+  <thead>
+    <tr>
+      <tr class="table-dark">
+    <th scope="col" class="text-center align-middle"></th>
+    <th scope="col" class="text-center align-middle">Nombre</th>
+    <th scope="col" class="text-center align-middle">Precio</th>
+    <th scope="col" class="text-center align-middle" >Foto</th>
+  </tr>
+    </tr>
+  </thead>
+  <tbody id="listadoProductos">
+    <input type="text"  style="display: none;" value={{cartId}} id="cart">
+      {{#each products}}
+        {{#if this}}
+          {{#each this}}
+            {{#if title}}
+              <tr class="text-center align-middle">
+                  {{!-- <th scope="row" class="text-center align-middle">{{_id}}</th> --}}
+                  <td class="text-center align-middle">
+                    <input name="product" value={{_id}} style="display: none;"/>
+                      <button type="button" onclick="addToCart(this)" id={{_id}} class="btn btn-primary btn-sm">
+                        Agregar al carrito
+                      </button>
+                  </td>
+                  <td class="text-center align-middle">{{title}}</td>
+                  <td class="text-center align-middle">$ {{price}}</td>
+                  <td class="text-center align-middle"><img src="{{thumbnail}}" alt="{{title}}" style="width:3rem"></td>
+              </tr>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      {{/each}}
+  </tbody>
+</table>
+</div>
+</div>
