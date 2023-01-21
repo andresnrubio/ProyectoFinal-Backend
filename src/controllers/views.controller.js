@@ -1,6 +1,6 @@
-import cartApiContainer from "../api/carts.api.js"
-import orderApiContainer from "../api/orders.api.js"
-import productsApiContainer from "../api/products.api.js"
+import cartApiContainer from "../api/Carts.api.js"
+import orderApiContainer from "../api/Orders.api.js"
+import productsApiContainer from "../api/Products.api.js"
 import {addQuantity} from "../utils/utils.js"
 const productsAPI = new productsApiContainer()
 const cartsAPI = new cartApiContainer()

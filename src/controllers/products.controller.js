@@ -1,4 +1,4 @@
-import productsApiContainer from "../api/products.api.js"
+import productsApiContainer from "../api/Products.api.js"
 
 const API = new productsApiContainer()
 class productsController {

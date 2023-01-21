@@ -1,5 +1,5 @@
-import cartApiContainer from "../api/carts.api.js"
-import ordersApiContainer from "../api/orders.api.js"
+import cartApiContainer from "../api/Carts.api.js"
+import ordersApiContainer from "../api/Orders.api.js"
 import { avisoNuevaOrden } from "../utils/nodemailer.js"
 
 const ordersAPI = new ordersApiContainer()
