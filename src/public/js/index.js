@@ -56,7 +56,6 @@ const addToCart = ($this) =>{
 }
 
 const deleteFromCart = ($this) =>{
-  console.log($this)
   const {value: cartId} = document.getElementById("cart")
   const id = $this.id
   fetch(`/api/cart/${cartId}/productos/${id}`, {

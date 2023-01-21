@@ -5,7 +5,6 @@ class productsController {
 
 
 getAll = async (req, res) => {
-  console.log("hola")
     try {
         let products = await API.getAllFile();
         res.json({

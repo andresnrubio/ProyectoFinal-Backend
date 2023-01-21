@@ -55,7 +55,6 @@ return `
 }
 
 async function avisoNuevaOrden(order) {
-console.log(order)
 let transporter = nodemailer.createTransport({
 service: "gmail",
 port: 587,
