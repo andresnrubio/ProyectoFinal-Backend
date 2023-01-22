@@ -1,6 +1,5 @@
 import express from "express";
 import authMiddleware from "../../middlewares/auth/auth.middleware.js";
-import { generateToken } from "../../middlewares/jwt/jwt.middleware.js";
 import upload from "../../utils/multer.js";
 const { Router } = express;
 import { passport, usersCollection } from '../../middlewares/passport/passport.middleware.js';

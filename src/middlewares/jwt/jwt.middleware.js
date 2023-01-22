@@ -7,17 +7,34 @@ const generateToken = username => {
 }
 const validateToken = async (req, res, next) =>{
 let accessToken = req.headers['x-access-token'] || req.headers['authorization'];
+console.log(!accessToken)
 console.log(accessToken)
+if(!accessToken){
+    res.send('Acceso denegado')
+}else{
 accessToken = accessToken.replace(/^Bearer\s+/, "");
-if(!accessToken){ res.send('Acceso denegado')}
-
 jwt.verify(accessToken, process.env.JWT_SECRET, (err, user) => {
     if(err){
         res.send("Acceso denegado, token incorrecto o vencido")
     }else{
         next()
     }
-})
+})}
 } 
+
+// function generateJWTCookie(req, res, token) {
+//     res.cookie('jwt', token, {
+//         httpOnly: true,
+//         sameSite: true,
+//         signed: true,
+//         secure: false,
+//     });
+// }
+
+// function sendJWTCookie(req, res, next) {
+//     const token = generateToken(req, res);
+//     generateJWTCookie(req, res, token);
+//     next();
+// }
 
 export {generateToken, validateToken}
