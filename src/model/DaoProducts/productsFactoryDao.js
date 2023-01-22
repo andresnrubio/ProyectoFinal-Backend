@@ -9,7 +9,7 @@ class productsFactoryDAO {
             case 'mongo':
                 return new productsDaoMongoDb()
             default:
-                return new productsDaoFs()
+                return new productsDaoMongoDb()
         }
     }
 }   

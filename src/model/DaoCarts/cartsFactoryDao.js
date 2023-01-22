@@ -9,7 +9,7 @@ class cartsFactoryDAO {
             case 'mongo':
                 return new cartsDaoMongoDb()
             default:
-                return new cartsDaoFs()
+                return new cartsDaoMongoDb()
         }
     }
 }   
