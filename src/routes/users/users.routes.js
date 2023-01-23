@@ -54,7 +54,12 @@ router.post("/signup-client", passport.authenticate('signup', {
 
 
 router.post("/logout", logout, (req, res) => {
-  try {
+  try { 
+    req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send(`<h1>No se pudo cerrar sesion</h1>`);
+    }
+  });
     res.status(200).json({success: true})
   } catch (error) {
     res.status(500).json({
