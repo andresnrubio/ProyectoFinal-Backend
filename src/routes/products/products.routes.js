@@ -6,7 +6,7 @@ import authMiddleware from "../../middlewares/auth/auth.middleware.js";
 import productsController from "../../controllers/products.controller.js"
 const productsControllerMethods = new productsController()
 
-router.get("/all", productsControllerMethods.getAll);
+router.get("/", productsControllerMethods.getAll);
 
 router.get("/:id", productsControllerMethods.getById);
 
