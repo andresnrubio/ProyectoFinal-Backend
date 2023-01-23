@@ -44,7 +44,6 @@ jwt.verify(accessToken, process.env.JWT_SECRET, (err, user) => {
 
 const logout = async (req, res, next) => {
     await res.clearCookie('jwt');
-    res.json({ success: 'ok' });
     next();
 };
 

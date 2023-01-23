@@ -34,5 +34,4 @@ socket.on("chat", (dataMessages) => {
   });
   
   document.getElementById("mensajes").innerHTML = chat;
-  // document.getElementById("compresion").innerHTML = `Compresion: ${lengthReduction.toFixed(2)}%`
 });

@@ -39,7 +39,17 @@ router.post("/signup", passport.authenticate('signup', {
   req.session.admin = true;
   avisoNuevoUsuario(req.body)
   // res.render("avatarUpload", { layouts: "index" });
-  res.status(200).redirect("/api/productos");
+  sendJWT(req, res)
+})
+
+router.post("/signup-client", passport.authenticate('signup', {
+  failureRedirect: '/signuperror'
+}), sendJWTCookie, (req, res) => {
+  req.session.username = req.body.username;
+  req.session.admin = true;
+  avisoNuevoUsuario(req.body)
+  // res.render("avatarUpload", { layouts: "index" });
+  res.status(200).redirect("/home");
 })
 
 
