@@ -4,6 +4,7 @@ import upload from "../../utils/multer.js";
 const { Router } = express;
 import { passport, usersCollection } from '../../middlewares/passport/passport.middleware.js';
 import { avisoNuevoUsuario } from "../../utils/nodemailer.js";
+import { sendJWTCookie, sendJWT, logout } from "../../middlewares/jwt/jwt.middleware.js";
 const router = Router();
 
 router.get("/login", authMiddleware, async (req, res) => {
@@ -16,12 +17,12 @@ router.post("/login", passport.authenticate('login',
 ), (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;
-  res.json({token: generateToken({user:req.body.username})})
+  sendJWT(req, res)
 });
 
 router.post("/loginForm", passport.authenticate('login', 
 {failureRedirect: '/autherror'}
-), (req, res) => {
+),sendJWTCookie, (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;
   res.status(200).redirect("/home");
@@ -33,7 +34,7 @@ router.get("/signup", async (req, res) => {
 
 router.post("/signup", passport.authenticate('signup', {
   failureRedirect: '/signuperror'
-}), (req, res) => {
+}), sendJWTCookie, (req, res) => {
   req.session.username = req.body.username;
   req.session.admin = true;
   avisoNuevoUsuario(req.body)
@@ -42,7 +43,18 @@ router.post("/signup", passport.authenticate('signup', {
 })
 
 
-router.get("/logout", authMiddleware, async (req, res) => {
+router.post("/logout", logout, (req, res) => {
+  try {
+    res.status(200)
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+router.get("/logout", authMiddleware, logout, async (req, res) => {
   try {
     req.session.destroy((err) => {
       if (err) {

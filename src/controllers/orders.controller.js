@@ -19,6 +19,20 @@ class ordersController {
             })
         }
     }
+
+    createOrderRedirect = async (req, res) => {
+        try {
+            const cart = await cartsApi.getById(req.body.cartId)
+            const order = await ordersAPI.createOrder(cart)
+            await cartsApi.deleteCart(req.body.cartId)
+            avisoNuevaOrden(order)
+            res.redirect("/orders")
+        } catch (error) {
+            res.status(500).json({
+                msg: "No se pudo crear la orden"
+            })
+        }
+    }
     
     getOrderById = async (req, res) => {
         try {

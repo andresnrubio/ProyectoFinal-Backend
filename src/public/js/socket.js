@@ -11,7 +11,6 @@ const chatSchema = new normalizr.schema.Entity("chat", {
 })
 
 const btnEnviar = document.getElementById("btnEnviar");
-console.log(btnEnviar)
 btnEnviar.addEventListener("click", (event) => {
   event.preventDefault();
   let email = document.getElementById("email").value;

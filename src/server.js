@@ -1,5 +1,6 @@
 import express from "express"
 import mainRouter from "./routes/index.routes.js";
+import cookieParser from "cookie-parser";
 import * as dotenv from 'dotenv'
 dotenv.config()
 import path from 'path';
@@ -9,6 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.use(cookieParser());
 const PORT = process.env.PORT;
 
 const { Server: HttpServer } = await import("http");

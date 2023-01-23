@@ -1,5 +1,4 @@
 const addToCart = ($this) =>{
-  console.log(document.getElementById("cart"))
   const {value: cartId} = document.getElementById("cart")
   const id = $this.id
   const data = JSON.stringify({id: id})
